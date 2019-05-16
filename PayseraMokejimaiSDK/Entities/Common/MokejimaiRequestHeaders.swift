@@ -1,7 +1,10 @@
 import ObjectMapper
 
 public class MokejimaiRequestHeaders {
-    public var headers: [URLRequestHeader]
+    public var headers = [URLRequestHeader]()
+    
+    public init() {
+    }
     
     public init(headers: [URLRequestHeader]) {
         self.headers = headers
