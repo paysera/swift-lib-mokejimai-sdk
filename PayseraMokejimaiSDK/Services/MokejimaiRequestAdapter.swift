@@ -3,18 +3,23 @@ import Alamofire
 import CommonCrypto
 
 class MokejimaiRequestAdapter: RequestAdapter {
-    private let mokejimaiRequestHeaders: MokejimaiRequestHeaders
+    private let headers: MokejimaiRequestHeaders
+    private let credentials: MokejimaiApiCredentials
     
-    init(mokejimaiRequestHeaders: MokejimaiRequestHeaders) {
-        self.mokejimaiRequestHeaders = mokejimaiRequestHeaders
+    init(credentials: MokejimaiApiCredentials, headers: MokejimaiRequestHeaders) {
+        self.credentials = credentials
+        self.headers = headers
     }
     
     public func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
         var urlRequest = urlRequest
-
-        mokejimaiRequestHeaders.headers.forEach {
+       
+        urlRequest.setValue("Bearer " + (credentials.token?.string ?? ""), forHTTPHeaderField: "Authorization")
+        
+        headers.headers.forEach {
             urlRequest.setValue($0.value, forHTTPHeaderField: $0.headerKey)
         }
+        
         return urlRequest
     }
 }

@@ -43,11 +43,11 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     
     func createMokejimaiApiClient() -> MokejimaiApiClient {
         let mokejimaiToken = try? decode(jwt: jwtToken)
-        let mokejimaiCredentials = MokejimaiApiCredentials(token: mokejimaiToken)
+        let credentials = MokejimaiApiCredentials(token: mokejimaiToken)
         
         return MokejimaiApiClientFactory.createTransferApiClient(
-            mokejimaiRequestHeaders: MokejimaiRequestHeaders(headers: [.jwtToken(jwtToken), .acceptLanguage(language)]),
-            credentials: mokejimaiCredentials,
+            headers: MokejimaiRequestHeaders(headers: [.acceptLanguage(language)]),
+            credentials: credentials,
             tokenRefresher: MokejimaiTokenTestRefresher()
         )
     }
