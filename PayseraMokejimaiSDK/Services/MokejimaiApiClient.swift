@@ -138,12 +138,12 @@ public class MokejimaiApiClient {
         return Promise.value(object)
     }
     
-    private func mapError(body: Any?) -> PSMokejimaiApiError {
-        if let apiError = Mapper<PSMokejimaiApiError>().map(JSONObject: body) {
+    private func mapError(body: Any?) -> PSApiError {
+        if let apiError = Mapper<PSApiError>().map(JSONObject: body) {
             return apiError
         }
         
-        return PSMokejimaiApiError.unknown()
+        return PSApiError.unknown()
     }
     
     private func createRequest<T: ApiRequest, R: URLRequestConvertible>(_ endpoint: R) -> T {

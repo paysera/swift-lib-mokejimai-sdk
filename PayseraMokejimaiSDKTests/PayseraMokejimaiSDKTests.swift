@@ -1,12 +1,13 @@
 import XCTest
 import JWTDecode
+import PayseraCommonSDK
 import PromiseKit
 
 @testable import PayseraMokejimaiSDK
 
 class MokejimaiTokenTestRefresher: TokenRefresherProtocol {
     func refreshToken() -> Promise<Bool> {
-        return Promise<Bool> { $0.reject(PSMokejimaiApiError.unauthorized()) }
+        return Promise<Bool> { $0.reject(PSApiError.unauthorized()) }
     }
     
     func isRefreshing() -> Bool {
@@ -32,7 +33,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
             .done { response in
                 transferConfigurations = response.items
             }.catch { error in
-                print((error as? PSMokejimaiApiError)?.toJSON() ?? "")
+                print((error as? PSApiError)?.toJSON() ?? "")
             }.finally {
                 expectation.fulfill()
             }

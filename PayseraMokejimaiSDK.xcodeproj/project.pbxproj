@@ -15,7 +15,6 @@
 		1CC63065221C11880092AF33 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC6305F221C11880092AF33 /* ApiRequest.swift */; };
 		1CC63066221C11880092AF33 /* MokejimaiApiCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC63061221C11880092AF33 /* MokejimaiApiCredentials.swift */; };
 		1CC63073221C13D40092AF33 /* TokenRefresherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC63072221C13D40092AF33 /* TokenRefresherProtocol.swift */; };
-		1CC63075221C14BD0092AF33 /* PSMokejimaiApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC63074221C14BD0092AF33 /* PSMokejimaiApiError.swift */; };
 		1CC6307D221C17580092AF33 /* PSManualTransferConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC6307C221C17580092AF33 /* PSManualTransferConfiguration.swift */; };
 		1CCA67522225889400F2C377 /* MokejimaiRequestHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCA67512225889400F2C377 /* MokejimaiRequestHeaders.swift */; };
 		1CF95740221D6F38007DE4AA /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 1CF9573E221D6F38007DE4AA /* Cartfile.resolved */; };
@@ -54,7 +53,6 @@
 		1CC6306C221C11D20092AF33 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		1CC6306D221C11D20092AF33 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		1CC63072221C13D40092AF33 /* TokenRefresherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRefresherProtocol.swift; sourceTree = "<group>"; };
-		1CC63074221C14BD0092AF33 /* PSMokejimaiApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSMokejimaiApiError.swift; sourceTree = "<group>"; };
 		1CC6307C221C17580092AF33 /* PSManualTransferConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSManualTransferConfiguration.swift; sourceTree = "<group>"; };
 		1CCA67512225889400F2C377 /* MokejimaiRequestHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MokejimaiRequestHeaders.swift; sourceTree = "<group>"; };
 		1CF9573E221D6F38007DE4AA /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 			children = (
 				1CC63061221C11880092AF33 /* MokejimaiApiCredentials.swift */,
 				1CCA67512225889400F2C377 /* MokejimaiRequestHeaders.swift */,
-				1CC63074221C14BD0092AF33 /* PSMokejimaiApiError.swift */,
 				ED92261A226F3A04003D210B /* URLRequestHeader.swift */,
 			);
 			path = Common;
@@ -319,7 +316,6 @@
 				1CF95745221D74A0007DE4AA /* MokejimaiApiRequestRouter.swift in Sources */,
 				ED92261B226F3A04003D210B /* URLRequestHeader.swift in Sources */,
 				1CC63073221C13D40092AF33 /* TokenRefresherProtocol.swift in Sources */,
-				1CC63075221C14BD0092AF33 /* PSMokejimaiApiError.swift in Sources */,
 				1CCA67522225889400F2C377 /* MokejimaiRequestHeaders.swift in Sources */,
 				1CC63066221C11880092AF33 /* MokejimaiApiCredentials.swift in Sources */,
 				1CC63063221C11880092AF33 /* MokejimaiRequestAdapter.swift in Sources */,
