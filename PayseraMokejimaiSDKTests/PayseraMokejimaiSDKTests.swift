@@ -24,7 +24,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         
         let mokejimaiApiClient = createMokejimaiApiClient()
         
-        let filter = BaseFilter()
+        let filter = PSBaseFilter()
         filter.limit = 200
         
         mokejimaiApiClient

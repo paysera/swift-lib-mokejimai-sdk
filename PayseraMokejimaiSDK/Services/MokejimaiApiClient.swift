@@ -2,24 +2,28 @@ import Foundation
 import Alamofire
 import PromiseKit
 import ObjectMapper
+import PayseraCommonSDK
 
 public class MokejimaiApiClient {
     private let sessionManager: SessionManager
     private let credentials: MokejimaiApiCredentials
     private let tokenRefresher: TokenRefresherProtocol?
+    private let logger: PSLoggerProtocol?
     private var requestsQueue = [ApiRequest]()
     
     public init(
         sessionManager: SessionManager,
         credentials: MokejimaiApiCredentials,
-        tokenRefresher: TokenRefresherProtocol?
+        tokenRefresher: TokenRefresherProtocol?,
+        logger: PSLoggerProtocol? = nil
     ) {
         self.sessionManager = sessionManager
         self.tokenRefresher = tokenRefresher
         self.credentials = credentials
+        self.logger = logger
     }
     
-    public func getManualTransferConfiguration(filter: BaseFilter) -> Promise<PSMetadataAwareResponse<PSManualTransferConfiguration>> {
+    public func getManualTransferConfiguration(filter: PSBaseFilter) -> Promise<PSMetadataAwareResponse<PSManualTransferConfiguration>> {
         return doRequest(requestRouter: MokejimaiApiRequestRouter.getManualTransferConfiguration(filter: filter))
     }
     
@@ -30,9 +34,18 @@ public class MokejimaiApiClient {
             if let tokenRefresher = tokenRefresher, tokenRefresher.isRefreshing() {
                 requestsQueue.append(apiRequest)
             } else {
+                self.logger?.log(level: .INFO, message: "--> \(apiRequest.requestEndPoint.urlRequest!.url!.absoluteString)")
+                
                 sessionManager
                     .request(apiRequest.requestEndPoint)
                     .responseJSON { (response) in
+                        var logMessage = "<-- \(apiRequest.requestEndPoint.urlRequest!.url!.absoluteString)"
+                        if let statusCode = response.response?.statusCode {
+                            logMessage += " (\(statusCode))"
+                        }
+                        
+                        self.logger?.log(level: .INFO, message: logMessage)
+                        
                         let responseData = response.result.value
                         
                         guard let statusCode = response.response?.statusCode else {

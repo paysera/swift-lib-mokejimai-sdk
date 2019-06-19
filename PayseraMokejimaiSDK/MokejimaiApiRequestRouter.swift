@@ -1,9 +1,10 @@
 import Foundation
 import Alamofire
+import PayseraCommonSDK
 
 public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     // MARK: - GET
-    case getManualTransferConfiguration(filter: BaseFilter)
+    case getManualTransferConfiguration(filter: PSBaseFilter)
     
     // MARK: - POST
     

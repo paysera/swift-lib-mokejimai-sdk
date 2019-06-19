@@ -1,4 +1,5 @@
 import ObjectMapper
+import PayseraCommonSDK
 
 public class PSManualTransferConfiguration: Mappable {
     public let fromBankKey: String
