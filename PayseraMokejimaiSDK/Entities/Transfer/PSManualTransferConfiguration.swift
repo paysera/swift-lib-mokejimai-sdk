@@ -3,12 +3,15 @@ import PayseraCommonSDK
 
 public class PSManualTransferConfiguration: Mappable {
     public let fromBankKey: String
+    public let fromBankKeyTranslation: String
     public let toBankKey: String
+    public let toBankKeyTranslation: String
     public let currency: String
     public let toCountryCode: String
     public let toBeneficiaryName: String
     public let commission: PSMoney
     public let transferExecutionTime: String
+    public let transferExecutionTimeKey: String
     
     public var fromCountryCode: String?
     public var toIban: String?
@@ -29,12 +32,15 @@ public class PSManualTransferConfiguration: Mappable {
     required public init?(map: Map) {
         do {
             fromBankKey = try map.value("from_bank_key")
+            fromBankKeyTranslation = try map.value("from_bank_key_translation")
             toBankKey = try map.value("to_bank_key")
+            toBankKeyTranslation = try map.value("to_bank_key_translation")
             currency = try map.value("currency")
             toCountryCode = try map.value("to_country_code")
             toBeneficiaryName = try map.value("to_beneficiary_name")
             commission = try map.value("commission")
             transferExecutionTime = try map.value("transfer_execution_time")
+            transferExecutionTimeKey = try map.value("transfer_execution_time_key")
         } catch {
             return nil
         }
