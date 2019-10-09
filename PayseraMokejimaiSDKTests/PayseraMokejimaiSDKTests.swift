@@ -5,18 +5,8 @@ import PromiseKit
 
 @testable import PayseraMokejimaiSDK
 
-class MokejimaiTokenTestRefresher: TokenRefresherProtocol {
-    func refreshToken() -> Promise<Bool> {
-        return Promise<Bool> { $0.reject(PSApiError.unauthorized()) }
-    }
-    
-    func isRefreshing() -> Bool {
-        return false
-    }
-}
-
 class PayseraMokejimaiSDKTests: XCTestCase {
-    private let jwtToken = "change_me"
+    private let jwtToken = "insert_me"
     private let language = "en"
     
     func testGetManualTransferConfiguration() {
@@ -44,12 +34,11 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     
     func createMokejimaiApiClient() -> MokejimaiApiClient {
         let mokejimaiToken = try? decode(jwt: jwtToken)
-        let credentials = MokejimaiApiCredentials(token: mokejimaiToken)
+        let credentials = PSApiJWTCredentials(token: mokejimaiToken)
         
         return MokejimaiApiClientFactory.createTransferApiClient(
-            headers: MokejimaiRequestHeaders(headers: [.acceptLanguage(language)]),
-            credentials: credentials,
-            tokenRefresher: MokejimaiTokenTestRefresher()
+            headers: PSRequestHeaders(headers: [.acceptLanguage(language)]),
+            credentials: credentials
         )
     }
 }
