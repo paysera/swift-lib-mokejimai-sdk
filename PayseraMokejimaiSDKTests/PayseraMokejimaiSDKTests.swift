@@ -32,6 +32,32 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         XCTAssertNotNil(transferConfigurations)
     }
     
+    func testCreateCompanyAccount() {
+        var companyAccount: PSCompanyAccount?
+        var apiError: PSApiError?
+        let userId: Int = 0 // change me
+        let expectation = XCTestExpectation(description: "Get createCompanyAccount should return some response")
+        let companyIdentifier = PSCompanyIdentifier(countryCode: "lt", companyCode: "300060819")
+        
+        createMokejimaiApiClient()
+            .createCompanyAccount(userId: userId, companyIdentifier: companyIdentifier)
+            .done { response in
+                companyAccount = response
+            }
+            .catch { error in
+                apiError = error as? PSApiError
+                print(apiError?.toJSON() ?? "")
+            }
+            .finally {
+                expectation.fulfill()
+            }
+
+        wait(for: [expectation], timeout: 10.0)
+        
+        XCTAssertNotNil(apiError)
+        XCTAssertEqual(apiError?.error, "manager_name_mismatch")
+    }
+    
     func createMokejimaiApiClient() -> MokejimaiApiClient {
         let mokejimaiToken = try? decode(jwt: jwtToken)
         let credentials = PSApiJWTCredentials(token: mokejimaiToken)
