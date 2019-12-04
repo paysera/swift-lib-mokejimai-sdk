@@ -8,6 +8,7 @@ import PromiseKit
 class PayseraMokejimaiSDKTests: XCTestCase {
     private let jwtToken = "insert_me"
     private let language = "en"
+    private let userId: Int = 0 // insert me
     
     func testGetManualTransferConfiguration() {
         var transferConfigurations: [PSManualTransferConfiguration]?
@@ -30,6 +31,31 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     
         wait(for: [expectation], timeout: 10.0)
         XCTAssertNotNil(transferConfigurations)
+    }
+    
+    func testCreateCompanyAccount() {
+        var companyAccount: PSCompanyAccount?
+        var apiError: PSApiError?
+        let expectation = XCTestExpectation(description: "Get createCompanyAccount should return some response")
+        let companyIdentifier = PSCompanyIdentifier(countryCode: "lt", companyCode: "300060819")
+        
+        createMokejimaiApiClient()
+            .createCompanyAccount(userId: userId, companyIdentifier: companyIdentifier)
+            .done { response in
+                companyAccount = response
+            }
+            .catch { error in
+                apiError = error as? PSApiError
+                print(apiError?.toJSON() ?? "")
+            }
+            .finally {
+                expectation.fulfill()
+            }
+
+        wait(for: [expectation], timeout: 10.0)
+        
+        XCTAssertNotNil(apiError)
+        XCTAssertEqual(apiError?.error, "manager_name_mismatch")
     }
     
     func createMokejimaiApiClient() -> MokejimaiApiClient {

@@ -7,6 +7,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case getManualTransferConfiguration(filter: PSBaseFilter)
     
     // MARK: - POST
+    case createCompanyAccount(userId: Int, companyIdentifier: PSCompanyIdentifier)
     
     // MARK: - PUT
     
@@ -17,6 +18,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
         switch self {
         case .getManualTransferConfiguration(_):
             return .get
+        case .createCompanyAccount:
+            return .post
         }
     }
     
@@ -25,6 +28,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             
         case .getManualTransferConfiguration(_):
             return "/manual-transfer-configuration/rest/v1/configurations"
+        case .createCompanyAccount:
+            return "/company-account/rest/v1/company-accounts"
         }
     }
     
@@ -32,7 +37,12 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
         switch self {
             case .getManualTransferConfiguration(let filter):
                 return filter.toJSON()
-                
+            case .createCompanyAccount(let userId, let companyIdentifier):
+                return [
+                    "manager_id": userId,
+                    "type": "company_identifier",
+                    "company_identifier": companyIdentifier.toJSON()
+                ]
             default:
                 return nil
         }
