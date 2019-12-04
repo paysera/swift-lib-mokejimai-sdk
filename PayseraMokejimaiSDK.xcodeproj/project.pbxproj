@@ -128,7 +128,7 @@
 		1CC63060221C11880092AF33 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				600E39B12397AA69005D7998 /* Company account */,
+				600E39B12397AA69005D7998 /* CompanyAccount */,
 				1CC6307B221C17300092AF33 /* Transfer */,
 			);
 			path = Entities;
@@ -154,13 +154,13 @@
 			path = Transfer;
 			sourceTree = "<group>";
 		};
-		600E39B12397AA69005D7998 /* Company account */ = {
+		600E39B12397AA69005D7998 /* CompanyAccount */ = {
 			isa = PBXGroup;
 			children = (
 				600E39B22397AA9A005D7998 /* PSCompanyAccount.swift */,
 				600E39B42397B04B005D7998 /* PSCompanyIdentifier.swift */,
 			);
-			path = "Company account";
+			path = CompanyAccount;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

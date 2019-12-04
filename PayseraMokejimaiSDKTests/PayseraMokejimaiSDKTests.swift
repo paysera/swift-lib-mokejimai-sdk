@@ -8,7 +8,6 @@ import PromiseKit
 class PayseraMokejimaiSDKTests: XCTestCase {
     private let jwtToken = "insert_me"
     private let language = "en"
-    private let userId: Int = 0 // insert me
     
     func testGetManualTransferConfiguration() {
         var transferConfigurations: [PSManualTransferConfiguration]?
@@ -36,6 +35,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     func testCreateCompanyAccount() {
         var companyAccount: PSCompanyAccount?
         var apiError: PSApiError?
+        let userId: Int = 0 // change me
         let expectation = XCTestExpectation(description: "Get createCompanyAccount should return some response")
         let companyIdentifier = PSCompanyIdentifier(countryCode: "lt", companyCode: "300060819")
         
