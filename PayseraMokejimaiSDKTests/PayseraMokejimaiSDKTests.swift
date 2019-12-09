@@ -32,15 +32,74 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         XCTAssertNotNil(transferConfigurations)
     }
     
-    func testCreateCompanyAccount() {
+    func testCreatingLithuanianCompanyAccount() {
         var companyAccount: PSCompanyAccount?
         var apiError: PSApiError?
-        let userId: Int = 0 // change me
-        let expectation = XCTestExpectation(description: "Get createCompanyAccount should return some response")
-        let companyIdentifier = PSCompanyIdentifier(countryCode: "lt", companyCode: "300060819")
+        let userId: Int = 138776 // change me
+        let expectation = XCTestExpectation(description: "createCompanyAccount should return some response")
+        let companyIdentifier = PSCompanyIdentifier(countryCode: "LT", companyCode: "300060819")
         
         createMokejimaiApiClient()
-            .createCompanyAccount(userId: userId, companyIdentifier: companyIdentifier)
+            .createCompanyAccount(userId: userId, using: .identifier(companyIdentifier))
+            .done { response in
+                companyAccount = response
+            }
+            .catch { error in
+                apiError = error as? PSApiError
+                print(apiError?.toJSON() ?? "")
+            }
+            .finally {
+                expectation.fulfill()
+            }
+
+        wait(for: [expectation], timeout: 10.0)
+        
+        XCTAssertNotNil(apiError)
+        XCTAssertEqual(apiError?.error, "manager_name_mismatch")
+    }
+    
+    func testCreatinngBulgarianCompanyAccount() {
+            var companyAccount: PSCompanyAccount?
+            var apiError: PSApiError?
+            var solutionError: PSCompanyTaskSolutionError?
+            let userId: Int = 138776 // change me
+            let expectation = XCTestExpectation(description: "createCompanyAccount should return some response")
+            let companyIdentifier = PSCompanyIdentifier(countryCode: "BG", companyCode: "204037635")
+            
+            createMokejimaiApiClient()
+                .createCompanyAccount(userId: userId, using: .identifier(companyIdentifier))
+                .done { response in
+                    companyAccount = response
+                }
+                .catch { error in
+                    apiError = error as? PSApiError
+                    if let json = apiError?.data as? [String: Any] {
+                        solutionError = PSCompanyTaskSolutionError(JSON: json)
+                    }
+                    print(apiError?.toJSON() ?? "")
+                }
+                .finally {
+                    expectation.fulfill()
+                }
+
+            wait(for: [expectation], timeout: 10.0)
+            
+            XCTAssertNotNil(apiError)
+            XCTAssertNotNil(solutionError)
+            XCTAssertEqual(apiError?.error, "task_solution_required")
+    }
+    
+    func testSolvingTask() {
+        var companyAccount: PSCompanyAccount?
+        var apiError: PSApiError?
+        let userId: Int = 138776 // change me
+        let expectation = XCTestExpectation(description: "createCompanyAccount should return some response")
+        let companyTask = PSCompanyTask(id: "5XMVigNsGD", countryCode: "BG", solution: "RYGG5")
+        
+        print(companyTask)
+        
+        createMokejimaiApiClient()
+            .createCompanyAccount(userId: userId, using: .task(companyTask))
             .done { response in
                 companyAccount = response
             }

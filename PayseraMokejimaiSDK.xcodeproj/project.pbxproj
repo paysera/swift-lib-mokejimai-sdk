@@ -19,6 +19,10 @@
 		1CF95745221D74A0007DE4AA /* MokejimaiApiRequestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF95744221D74A0007DE4AA /* MokejimaiApiRequestRouter.swift */; };
 		600E39B32397AA9A005D7998 /* PSCompanyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600E39B22397AA9A005D7998 /* PSCompanyAccount.swift */; };
 		600E39B52397B04B005D7998 /* PSCompanyIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600E39B42397B04B005D7998 /* PSCompanyIdentifier.swift */; };
+		607265D9239E40E6002FE1E0 /* PSCompanyTaskType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607265D8239E40E6002FE1E0 /* PSCompanyTaskType.swift */; };
+		60FC8B07239AB40B00E22EDC /* PSCompanyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B06239AB40B00E22EDC /* PSCompanyTask.swift */; };
+		60FC8B09239AC2B400E22EDC /* PSCompanyCreationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B08239AC2B400E22EDC /* PSCompanyCreationType.swift */; };
+		60FC8B0B239AC36200E22EDC /* PSCompanyTaskSolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */; };
 		ED8FB00222BA6DA700792600 /* PayseraCommonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +55,10 @@
 		1CF95744221D74A0007DE4AA /* MokejimaiApiRequestRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MokejimaiApiRequestRouter.swift; sourceTree = "<group>"; };
 		600E39B22397AA9A005D7998 /* PSCompanyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyAccount.swift; sourceTree = "<group>"; };
 		600E39B42397B04B005D7998 /* PSCompanyIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyIdentifier.swift; sourceTree = "<group>"; };
+		607265D8239E40E6002FE1E0 /* PSCompanyTaskType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyTaskType.swift; sourceTree = "<group>"; };
+		60FC8B06239AB40B00E22EDC /* PSCompanyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyTask.swift; sourceTree = "<group>"; };
+		60FC8B08239AC2B400E22EDC /* PSCompanyCreationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyCreationType.swift; sourceTree = "<group>"; };
+		60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyTaskSolutionError.swift; sourceTree = "<group>"; };
 		ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PayseraCommonSDK.framework; path = "../swift-lib-accounts-sdk/Carthage/Build/iOS/PayseraCommonSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,7 +166,11 @@
 			isa = PBXGroup;
 			children = (
 				600E39B22397AA9A005D7998 /* PSCompanyAccount.swift */,
+				60FC8B08239AC2B400E22EDC /* PSCompanyCreationType.swift */,
 				600E39B42397B04B005D7998 /* PSCompanyIdentifier.swift */,
+				60FC8B06239AB40B00E22EDC /* PSCompanyTask.swift */,
+				60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */,
+				607265D8239E40E6002FE1E0 /* PSCompanyTaskType.swift */,
 			);
 			path = CompanyAccount;
 			sourceTree = "<group>";
@@ -307,7 +319,11 @@
 				600E39B32397AA9A005D7998 /* PSCompanyAccount.swift in Sources */,
 				1CC63062221C11880092AF33 /* MokejimaiApiClient.swift in Sources */,
 				1CC63064221C11880092AF33 /* MokejimaiApiClientFactory.swift in Sources */,
+				607265D9239E40E6002FE1E0 /* PSCompanyTaskType.swift in Sources */,
+				60FC8B07239AB40B00E22EDC /* PSCompanyTask.swift in Sources */,
 				1CC6307D221C17580092AF33 /* PSManualTransferConfiguration.swift in Sources */,
+				60FC8B0B239AC36200E22EDC /* PSCompanyTaskSolutionError.swift in Sources */,
+				60FC8B09239AC2B400E22EDC /* PSCompanyCreationType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

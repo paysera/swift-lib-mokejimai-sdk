@@ -7,7 +7,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case getManualTransferConfiguration(filter: PSBaseFilter)
     
     // MARK: - POST
-    case createCompanyAccount(userId: Int, companyIdentifier: PSCompanyIdentifier)
+    case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
     
     // MARK: - PUT
     
@@ -37,12 +37,11 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
         switch self {
             case .getManualTransferConfiguration(let filter):
                 return filter.toJSON()
-            case .createCompanyAccount(let userId, let companyIdentifier):
+            case .createCompanyAccount(let userId, let creationType):
                 return [
                     "manager_id": userId,
-                    "type": "company_identifier",
-                    "company_identifier": companyIdentifier.toJSON()
-                ]
+                    "type": creationType.rawValue,
+                ].merging(creationType.toJSON()) { (first, _) in first }
             default:
                 return nil
         }

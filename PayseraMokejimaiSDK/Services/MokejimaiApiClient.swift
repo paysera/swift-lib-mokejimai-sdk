@@ -9,7 +9,7 @@ public class MokejimaiApiClient: PSBaseApiClient {
         return doRequest(requestRouter: MokejimaiApiRequestRouter.getManualTransferConfiguration(filter: filter))
     }
     
-    public func createCompanyAccount(userId: Int, companyIdentifier: PSCompanyIdentifier) -> Promise<PSCompanyAccount> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.createCompanyAccount(userId: userId, companyIdentifier: companyIdentifier))
+    public func createCompanyAccount(userId: Int, using creationType: PSCompanyCreationType) -> Promise<PSCompanyAccount> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.createCompanyAccount(userId: userId, creationType: creationType))
     }
 }
