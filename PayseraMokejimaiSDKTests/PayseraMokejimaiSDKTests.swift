@@ -35,7 +35,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     func testCreatingLithuanianCompanyAccount() {
         var companyAccount: PSCompanyAccount?
         var apiError: PSApiError?
-        let userId: Int = 138776 // change me
+        let userId: Int = 0 // change me
         let expectation = XCTestExpectation(description: "createCompanyAccount should return some response")
         let companyIdentifier = PSCompanyIdentifier(countryCode: "LT", companyCode: "300060819")
         
@@ -62,7 +62,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
             var companyAccount: PSCompanyAccount?
             var apiError: PSApiError?
             var solutionError: PSCompanyTaskSolutionError?
-            let userId: Int = 138776 // change me
+            let userId: Int = 0 // change me
             let expectation = XCTestExpectation(description: "createCompanyAccount should return some response")
             let companyIdentifier = PSCompanyIdentifier(countryCode: "BG", companyCode: "204037635")
             
@@ -92,7 +92,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     func testSolvingTask() {
         var companyAccount: PSCompanyAccount?
         var apiError: PSApiError?
-        let userId: Int = 138776 // change me
+        let userId: Int = 0 // change me
         let expectation = XCTestExpectation(description: "createCompanyAccount should return some response")
         let companyTask = PSCompanyTask(id: "5XMVigNsGD", countryCode: "BG", solution: "RYGG5")
         
