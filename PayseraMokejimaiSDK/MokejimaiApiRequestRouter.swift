@@ -5,7 +5,7 @@ import PayseraCommonSDK
 public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     // MARK: - GET
     case getManualTransferConfiguration(filter: PSBaseFilter)
-    
+    case logAppUnlocks(userId: String, appVersion: String)
     // MARK: - POST
     case createCompanyAccount(userId: Int, companyIdentifier: PSCompanyIdentifier)
     
@@ -20,6 +20,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return .get
         case .createCompanyAccount:
             return .post
+        case .logAppUnlocks:
+            return .post
         }
     }
     
@@ -30,6 +32,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/manual-transfer-configuration/rest/v1/configurations"
         case .createCompanyAccount:
             return "/company-account/rest/v1/company-accounts"
+        case .logAppUnlocks:
+            return "/log/rest/v1/logs"
         }
     }
     
@@ -43,6 +47,12 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
                     "type": "company_identifier",
                     "company_identifier": companyIdentifier.toJSON()
                 ]
+            case .logAppUnlocks(let userId, let appVersion):
+                return [
+                    "action" : "app_unlocked",
+                    "user_id": userId,
+                    "context": ["app_version": appVersion]
+            ]
             default:
                 return nil
         }
