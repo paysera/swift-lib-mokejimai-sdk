@@ -13,7 +13,7 @@ public class MokejimaiApiClient: PSBaseApiClient {
         return doRequest(requestRouter: MokejimaiApiRequestRouter.createCompanyAccount(userId: userId, companyIdentifier: companyIdentifier))
     }
 
-    public func logAppUnlocks(userId: String, appVersion: String) -> Promise<Any>{
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.logAppUnlocks(userId: userId, appVersion: appVersion))
+    public func sendLog(userId: String, action: String, context:[String: String]) -> Promise<Any>{
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.sendLog(userId: userId, action: action, context: context))
     }
 }
