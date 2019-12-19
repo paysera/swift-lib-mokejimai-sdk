@@ -12,4 +12,8 @@ public class MokejimaiApiClient: PSBaseApiClient {
     public func createCompanyAccount(userId: Int, companyIdentifier: PSCompanyIdentifier) -> Promise<PSCompanyAccount> {
         return doRequest(requestRouter: MokejimaiApiRequestRouter.createCompanyAccount(userId: userId, companyIdentifier: companyIdentifier))
     }
+
+    public func sendLog(userId: String, action: String, context:[String: String]) -> Promise<Any>{
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.sendLog(userId: userId, action: action, context: context))
+    }
 }
