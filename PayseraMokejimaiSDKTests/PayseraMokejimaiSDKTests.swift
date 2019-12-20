@@ -8,7 +8,26 @@ import PromiseKit
 class PayseraMokejimaiSDKTests: XCTestCase {
     private let jwtToken = "insert_me"
     private let language = "en"
-    
+
+    func testSendLog() {
+        let userId = "insert_me"
+        let appVersion = "insert_me"
+        
+        let action = "app_unlocked"
+        let context = ["app_version": appVersion]
+        let expectation = XCTestExpectation(description: "")
+            
+        createMokejimaiApiClient()
+            .sendLog(userId: userId, action: action, context: context)
+            .done { response in
+                print(response)
+            }.catch { error in
+                print((error as? PSApiError)?.toJSON() ?? "")
+            }.finally { expectation.fulfill() }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+
     func testGetManualTransferConfiguration() {
         var transferConfigurations: [PSManualTransferConfiguration]?
         let expectation = XCTestExpectation(description: "Manual Transfer Configuration should be not nil")
