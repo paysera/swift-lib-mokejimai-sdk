@@ -9,11 +9,10 @@ public class MokejimaiApiClientFactory {
         tokenRefresher: PSTokenRefresherProtocol? = nil,
         logger: PSLoggerProtocol? = nil
     ) -> MokejimaiApiClient {
-        let sessionManager = SessionManager()
-        sessionManager.adapter = PSRequestAdapter(credentials: credentials, headers: headers)
+        let session = Session(interceptor: PSRequestAdapter(credentials: credentials, headers: headers))
         
         return MokejimaiApiClient(
-            sessionManager: sessionManager,
+            session: session,
             credentials: credentials,
             tokenRefresher: tokenRefresher,
             logger: logger
