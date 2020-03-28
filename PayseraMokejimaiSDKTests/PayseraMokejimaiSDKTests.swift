@@ -144,7 +144,9 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         createMokejimaiApiClient()
             .getUserAddresses()
             .done { response in
-                actualCountry = PSAddress.getLivingAddress(from: response.items)?.countryCode
+                actualCountry = response.items
+                    .first { $0.type == "living_address" }?
+                    .countryCode
             }.catch { error in
                 print("Error: \((error as? PSApiError)?.toJSON() ?? [:])")
             }.finally {
@@ -157,22 +159,21 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     
     func testSetLivingAddress() {
         //Given
-        let expected = PSAddress.createLivingAddress(
-            countryCode: "insert_me",
-            countryName: "insert_me",
-            cityName: "insert_me",
-            transliteratedCityName: "insert_me",
-            postalCode: "insert_me",
-            streetName: "insert_me",
-            houseNumber: "insert_me",
-            apartmentNumber: "insert_me"
-        )
+        let expected = PSAddress()
+        expected.type = "insert_me"
+        expected.houseNumber = "insert_me"
+        expected.apartmentNumber = "insert_me"
+        expected.streetName = "insert_me"
+        expected.cityName = "insert_me"
+        expected.countryCode = "insert_me"
+        expected.postalCode = "insert_me"
+        expected.countryName = "insert_me"
 
         var actual: PSAddress?
         let expectation = XCTestExpectation(description: "User address must be the same as the address set")
 
         createMokejimaiApiClient()
-            .setLivingAddress(expected)
+            .setAddress(expected)
             .done { response in
                 actual = response
             }.catch { error in
@@ -182,7 +183,14 @@ class PayseraMokejimaiSDKTests: XCTestCase {
             }
         
         wait(for: [expectation], timeout: 10.0)
-        XCTAssertTrue(expected.isEqual(actual))
+        XCTAssertEqual(expected.type, actual?.type)
+        XCTAssertEqual(expected.houseNumber, actual?.houseNumber)
+        XCTAssertEqual(expected.apartmentNumber, actual?.apartmentNumber)
+        XCTAssertEqual(expected.streetName, actual?.streetName)
+        XCTAssertEqual(expected.cityName, actual?.cityName)
+        XCTAssertEqual(expected.countryCode, actual?.countryCode)
+        XCTAssertEqual(expected.postalCode, actual?.postalCode)
+        XCTAssertEqual(expected.countryName, actual?.countryName)
     }
     
     func createMokejimaiApiClient() -> MokejimaiApiClient {

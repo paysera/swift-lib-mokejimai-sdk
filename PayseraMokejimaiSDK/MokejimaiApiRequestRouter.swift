@@ -8,8 +8,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case sendLog(userId: String, action: String, context:[String: String])
     // MARK: - POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
-    case getUserAddresses
-    case setLivingAddress(address: PSAddress)
+    case getAddresses
+    case setAddress(address: PSAddress)
     
     // MARK: - PUT
     
@@ -19,12 +19,12 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     private var method: HTTPMethod {
         switch self {
         case .getManualTransferConfiguration,
-             .getUserAddresses:
+             .getAddresses:
             return .get
         case .createCompanyAccount,
              .sendLog:
             return .post
-        case .setLivingAddress:
+        case .setAddress:
             return .put
         }
     }
@@ -38,9 +38,9 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/company-account/rest/v1/company-accounts"
         case .sendLog:
             return "/log/rest/v1/logs"
-        case .getUserAddresses:
+        case .getAddresses:
             return "/user/rest/v1/users/current/addresses"
-        case .setLivingAddress:
+        case .setAddress:
             return "/user/rest/v1/users/current/addresses/living_address"
         }
     }
@@ -60,10 +60,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
                 "user_id": userId,
                 "context": context
             ]
-        case .setLivingAddress(let address):
-            var dictionary = address.toJSON()
-            dictionary["type"] = "living_address"
-            return dictionary
+        case .setAddress(let address):
+            return address.toJSON()
         default: return nil
         }
     }
@@ -77,8 +75,6 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
         urlRequest.httpMethod = requestMethod.rawValue
         
         switch requestMethod {
-        case .get:
-            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         case .post,
              .put:
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)

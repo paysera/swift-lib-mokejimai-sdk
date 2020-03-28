@@ -23,7 +23,6 @@
 		60FC8B09239AC2B400E22EDC /* PSCompanyCreationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B08239AC2B400E22EDC /* PSCompanyCreationType.swift */; };
 		60FC8B0B239AC36200E22EDC /* PSCompanyTaskSolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */; };
 		748D8BC2242F4C360097529C /* PSAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BC1242F4C360097529C /* PSAddress.swift */; };
-		748D8BC5242F7BC20097529C /* PSAddress+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BC4242F7BC20097529C /* PSAddress+Helper.swift */; };
 		ED8FB00222BA6DA700792600 /* PayseraCommonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +59,6 @@
 		60FC8B08239AC2B400E22EDC /* PSCompanyCreationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyCreationType.swift; sourceTree = "<group>"; };
 		60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyTaskSolutionError.swift; sourceTree = "<group>"; };
 		748D8BC1242F4C360097529C /* PSAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSAddress.swift; sourceTree = "<group>"; };
-		748D8BC4242F7BC20097529C /* PSAddress+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PSAddress+Helper.swift"; sourceTree = "<group>"; };
 		ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PayseraCommonSDK.framework; path = "../swift-lib-accounts-sdk/Carthage/Build/iOS/PayseraCommonSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,7 +187,6 @@
 		748D8BC3242F7BAA0097529C /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				748D8BC4242F7BC20097529C /* PSAddress+Helper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -351,7 +348,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CC63046221C11230092AF33 /* PayseraMokejimaiSDKTests.swift in Sources */,
-				748D8BC5242F7BC20097529C /* PSAddress+Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

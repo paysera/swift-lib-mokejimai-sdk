@@ -6,56 +6,38 @@ import PayseraCommonSDK
 
 public class MokejimaiApiClient: PSBaseApiClient {
     
-    public func setLivingAddress(_ address: PSAddress) -> Promise<PSAddress> {
-        return requestRouter(.setLivingAddress(address: address))
+    public func setAddress(_ address: PSAddress) -> Promise<PSAddress> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.setAddress(address: address))
     }
     
     public func getUserAddresses() -> Promise<PSMetadataAwareResponse<PSAddress>> {
-        return requestRouter(.getUserAddresses)
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.getAddresses)
     }
     
     public func getManualTransferConfiguration(filter: PSBaseFilter) -> Promise<PSMetadataAwareResponse<PSManualTransferConfiguration>> {
-        return requestRouter(.getManualTransferConfiguration(filter: filter))
+        return doRequest(
+            requestRouter: MokejimaiApiRequestRouter.getManualTransferConfiguration(
+                filter: filter
+            )
+        )
     }
     
     public func createCompanyAccount(userId: Int, using creationType: PSCompanyCreationType) -> Promise<PSCompanyAccount> {
-        return requestRouter(.createCompanyAccount(userId: userId, creationType: creationType))
+        return doRequest(
+            requestRouter: MokejimaiApiRequestRouter.createCompanyAccount(
+                userId: userId,
+                creationType: creationType
+            )
+        )
     }
 
     public func sendLog(userId: String, action: String, context:[String: String]) -> Promise<Any>{
-        return requestRouter(.sendLog(
+        return doRequest(
+            requestRouter: MokejimaiApiRequestRouter.sendLog(
                 userId: userId,
                 action: action,
                 context: context
             )
         )
-    }
-}
-
-//MARK: HELPER
-fileprivate extension MokejimaiApiClient {
-    
-    func requestRouter<E>(
-        _ requestRouter: MokejimaiApiRequestRouter
-    ) -> Promise<[E]> where E : Mappable {
-        return doRequest(requestRouter: requestRouter)
-    }
-    
-    func requestRouter<E>(
-        _ requestRouter: MokejimaiApiRequestRouter
-    ) -> Promise<E> where E : Mappable {
-        return doRequest(requestRouter: requestRouter)
-    }
-    
-    func requestRouter(
-        _ requestRouter: MokejimaiApiRequestRouter
-    ) -> Promise<Any> {
-        return doRequest(requestRouter: requestRouter)
-    }
-    
-    func requestRouter(
-        _ requestRouter: MokejimaiApiRequestRouter
-    ) -> Promise<Void> {
-        return doRequest(requestRouter: requestRouter)
     }
 }
