@@ -137,15 +137,14 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     }
     
     func testGetUserAddresses() {
-        var addresses: [PSAddress]?
-        let expectation = XCTestExpectation(description: "User address must match with the user's country")
-        let userId = 0
+        var actualCountry: String?
+        let expectation = XCTestExpectation(description: "User address must at least have living address")
         let expectedCountry = "insert_me"
         
         createMokejimaiApiClient()
-            .getUserAddresses(userId: userId)
+            .getUserAddresses()
             .done { response in
-                addresses = response.items
+                actualCountry = PSAddress.getLivingAddress(from: response.items)?.countryCode
             }.catch { error in
                 print("Error: \((error as? PSApiError)?.toJSON() ?? [:])")
             }.finally {
@@ -153,7 +152,37 @@ class PayseraMokejimaiSDKTests: XCTestCase {
             }
         
         wait(for: [expectation], timeout: 10.0)
-        XCTAssertEqual(addresses?.first?.countryCode, expectedCountry)
+        XCTAssertEqual(actualCountry, expectedCountry)
+    }
+    
+    func testSetLivingAddress() {
+        //Given
+        let expected = PSAddress.createLivingAddress(
+            countryCode: "insert_me",
+            countryName: "insert_me",
+            cityName: "insert_me",
+            transliteratedCityName: "insert_me",
+            postalCode: "insert_me",
+            streetName: "insert_me",
+            houseNumber: "insert_me",
+            apartmentNumber: "insert_me"
+        )
+
+        var actual: PSAddress?
+        let expectation = XCTestExpectation(description: "User address must be the same as the address set")
+
+        createMokejimaiApiClient()
+            .setLivingAddress(expected)
+            .done { response in
+                actual = response
+            }.catch { error in
+                print("Error: \((error as? PSApiError)?.toJSON() ?? [:])")
+            }.finally {
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 10.0)
+        XCTAssertTrue(expected.isEqual(actual))
     }
     
     func createMokejimaiApiClient() -> MokejimaiApiClient {

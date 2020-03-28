@@ -1,16 +1,16 @@
 import ObjectMapper
 
 public class PSAddress: Mappable {
-    public private(set) var type: String!
-    public private(set) var countryCode: String!
-    public private(set) var countryName: String!
-    public private(set) var cityName: String!
-    public private(set) var transliteratedCityName: String!
-    public private(set) var postalCode: String!
-    public private(set) var legacyAddress: String!
-    public private(set) var streetName: String!
-    public private(set) var houseNumber: String!
-    public private(set) var apartmentNumber: String!
+    public internal(set) var type: String!
+    public internal(set) var countryCode: String!
+    public internal(set) var countryName: String!
+    public internal(set) var cityName: String!
+    public internal(set) var transliteratedCityName: String!
+    public internal(set) var postalCode: String!
+    public internal(set) var legacyAddress: String!
+    public internal(set) var streetName: String!
+    public internal(set) var houseNumber: String!
+    public internal(set) var apartmentNumber: String!
 
     public init() {}
     

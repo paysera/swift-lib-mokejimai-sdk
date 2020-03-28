@@ -8,7 +8,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case sendLog(userId: String, action: String, context:[String: String])
     // MARK: - POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
-    case getUserAddresses(userId: Int)
+    case getUserAddresses
+    case setLivingAddress(address: PSAddress)
     
     // MARK: - PUT
     
@@ -23,6 +24,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
         case .createCompanyAccount,
              .sendLog:
             return .post
+        case .setLivingAddress:
+            return .put
         }
     }
     
@@ -37,26 +40,31 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/log/rest/v1/logs"
         case .getUserAddresses:
             return "/user/rest/v1/users/current/addresses"
+        case .setLivingAddress:
+            return "/user/rest/v1/users/current/addresses/living_address"
         }
     }
     
     private var parameters: Parameters? {
         switch self {
-            case .getManualTransferConfiguration(let filter):
-                return filter.toJSON()
-            case .createCompanyAccount(let userId, let creationType):
-                return [
-                    "manager_id": userId,
-                    "type": creationType.rawValue,
-                ].merging(creationType.toJSON()) { (first, _) in first }
-            case .sendLog(let userId, let action, let context):
-                return [
-                    "action" : action,
-                    "user_id": userId,
-                    "context": context
-                ]
-            case .getUserAddresses(let userId):
-                return ["user_id": userId]
+        case .getManualTransferConfiguration(let filter):
+            return filter.toJSON()
+        case .createCompanyAccount(let userId, let creationType):
+            return [
+                "manager_id": userId,
+                "type": creationType.rawValue,
+            ].merging(creationType.toJSON()) { (first, _) in first }
+        case .sendLog(let userId, let action, let context):
+            return [
+                "action" : action,
+                "user_id": userId,
+                "context": context
+            ]
+        case .setLivingAddress(let address):
+            var dictionary = address.toJSON()
+            dictionary["type"] = "living_address"
+            return dictionary
+        default: return nil
         }
     }
     
