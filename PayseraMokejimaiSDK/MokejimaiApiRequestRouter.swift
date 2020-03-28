@@ -8,6 +8,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case sendLog(userId: String, action: String, context:[String: String])
     // MARK: - POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
+    case getUserAddresses(userId: Int)
     
     // MARK: - PUT
     
@@ -16,11 +17,11 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     
     private var method: HTTPMethod {
         switch self {
-        case .getManualTransferConfiguration(_):
+        case .getManualTransferConfiguration,
+             .getUserAddresses:
             return .get
-        case .createCompanyAccount:
-            return .post
-        case .sendLog:
+        case .createCompanyAccount,
+             .sendLog:
             return .post
         }
     }
@@ -34,6 +35,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/company-account/rest/v1/company-accounts"
         case .sendLog:
             return "/log/rest/v1/logs"
+        case .getUserAddresses:
+            return "/user/rest/v1/users/current/addresses"
         }
     }
     
@@ -52,32 +55,28 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
                     "user_id": userId,
                     "context": context
                 ]
-            default:
-                return nil
+            case .getUserAddresses(let userId):
+                return ["user_id": userId]
         }
     }
     
     // MARK: - Method
     public func asURLRequest() throws -> URLRequest {
+        
+        let requestMethod = method
         let url = try! MokejimaiApiRequestRouter.baseURLString.asURL()
-        
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
-        urlRequest.httpMethod = method.rawValue
+        urlRequest.httpMethod = requestMethod.rawValue
         
-        switch self {
-            case (_) where method == .get:
-                urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-            
-            case (_) where method == .post:
-                urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-            
-            case (_) where method == .put:
-                urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-            
-            default:
-                urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        switch requestMethod {
+        case .get:
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case .post,
+             .put:
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        default:
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         }
-        
         return urlRequest
     }
 }

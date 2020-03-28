@@ -22,6 +22,7 @@
 		60FC8B07239AB40B00E22EDC /* PSCompanyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B06239AB40B00E22EDC /* PSCompanyTask.swift */; };
 		60FC8B09239AC2B400E22EDC /* PSCompanyCreationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B08239AC2B400E22EDC /* PSCompanyCreationType.swift */; };
 		60FC8B0B239AC36200E22EDC /* PSCompanyTaskSolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */; };
+		748D8BC2242F4C360097529C /* PSAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BC1242F4C360097529C /* PSAddress.swift */; };
 		ED8FB00222BA6DA700792600 /* PayseraCommonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		60FC8B06239AB40B00E22EDC /* PSCompanyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyTask.swift; sourceTree = "<group>"; };
 		60FC8B08239AC2B400E22EDC /* PSCompanyCreationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyCreationType.swift; sourceTree = "<group>"; };
 		60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyTaskSolutionError.swift; sourceTree = "<group>"; };
+		748D8BC1242F4C360097529C /* PSAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSAddress.swift; sourceTree = "<group>"; };
 		ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PayseraCommonSDK.framework; path = "../swift-lib-accounts-sdk/Carthage/Build/iOS/PayseraCommonSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +136,7 @@
 		1CC63060221C11880092AF33 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				748D8BC0242F4C1E0097529C /* Address */,
 				600E39B12397AA69005D7998 /* CompanyAccount */,
 				1CC6307B221C17300092AF33 /* Transfer */,
 			);
@@ -170,6 +173,14 @@
 				60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */,
 			);
 			path = CompanyAccount;
+			sourceTree = "<group>";
+		};
+		748D8BC0242F4C1E0097529C /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				748D8BC1242F4C360097529C /* PSAddress.swift */,
+			);
+			path = Address;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +331,7 @@
 				1CC6307D221C17580092AF33 /* PSManualTransferConfiguration.swift in Sources */,
 				60FC8B0B239AC36200E22EDC /* PSCompanyTaskSolutionError.swift in Sources */,
 				60FC8B09239AC2B400E22EDC /* PSCompanyCreationType.swift in Sources */,
+				748D8BC2242F4C360097529C /* PSAddress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

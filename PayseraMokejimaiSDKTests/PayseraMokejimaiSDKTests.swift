@@ -136,6 +136,26 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         XCTAssertEqual(apiError?.error, "manager_name_mismatch")
     }
     
+    func testGetUserAddresses() {
+        var addresses: [PSAddress]?
+        let expectation = XCTestExpectation(description: "User address must match with the user's country")
+        let userId = 0
+        let expectedCountry = "insert_me"
+        
+        createMokejimaiApiClient()
+            .getUserAddresses(userId: userId)
+            .done { response in
+                addresses = response.items
+            }.catch { error in
+                print("Error: \((error as? PSApiError)?.toJSON() ?? [:])")
+            }.finally {
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 10.0)
+        XCTAssertEqual(addresses?.first?.countryCode, expectedCountry)
+    }
+    
     func createMokejimaiApiClient() -> MokejimaiApiClient {
         let mokejimaiToken = try? decode(jwt: jwtToken)
         let credentials = PSApiJWTCredentials(token: mokejimaiToken)
