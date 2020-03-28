@@ -118,7 +118,6 @@
 		1CC63044221C11230092AF33 /* PayseraMokejimaiSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				748D8BC3242F7BAA0097529C /* Helper */,
 				1CC63045221C11230092AF33 /* PayseraMokejimaiSDKTests.swift */,
 				1CC63047221C11230092AF33 /* PayseraMokejimaiSDKTests.plist */,
 			);
@@ -182,13 +181,6 @@
 				748D8BC1242F4C360097529C /* PSAddress.swift */,
 			);
 			path = Address;
-			sourceTree = "<group>";
-		};
-		748D8BC3242F7BAA0097529C /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
