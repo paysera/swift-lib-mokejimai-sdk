@@ -167,7 +167,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         expected.cityName = "insert_me"
         expected.countryCode = "insert_me"
         expected.postalCode = "insert_me"
-        expected.countryName = "insert_me"
+        expected.countyName = "insert_me"
 
         var actual: PSAddress?
         let expectation = XCTestExpectation(description: "User address must be the same as the address set")
@@ -190,7 +190,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         XCTAssertEqual(expected.cityName, actual?.cityName)
         XCTAssertEqual(expected.countryCode, actual?.countryCode)
         XCTAssertEqual(expected.postalCode, actual?.postalCode)
-        XCTAssertEqual(expected.countryName, actual?.countryName)
+        XCTAssertEqual(expected.countyName, actual?.countyName)
     }
     
     func createMokejimaiApiClient() -> MokejimaiApiClient {

@@ -3,7 +3,7 @@ import ObjectMapper
 public class PSAddress: Mappable {
     public var type: String = ""
     public var countryCode: String!
-    public var countryName: String!
+    public var countyName: String!
     public var cityName: String!
     public var transliteratedCityName: String!
     public var postalCode: String!
@@ -20,7 +20,7 @@ public class PSAddress: Mappable {
     public func mapping(map: Map) {
         type <- map["type"]
         countryCode <- map["country_code"]
-        countryName <- map["county_name"]
+        countyName <- map["county_name"]
         cityName <- map["city_name"]
         transliteratedCityName <- map["transliterated_city_name"]
         postalCode <- map["postal_code"]
