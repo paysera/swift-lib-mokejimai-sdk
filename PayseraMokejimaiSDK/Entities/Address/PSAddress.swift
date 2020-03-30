@@ -1,7 +1,7 @@
 import ObjectMapper
 
 public class PSAddress: Mappable {
-    public var type: String!
+    public var type: String = ""
     public var countryCode: String!
     public var countryName: String!
     public var cityName: String!

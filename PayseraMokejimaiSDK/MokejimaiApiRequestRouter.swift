@@ -40,8 +40,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/log/rest/v1/logs"
         case .getAddresses:
             return "/user/rest/v1/users/current/addresses"
-        case .setAddress:
-            return "/user/rest/v1/users/current/addresses/living_address"
+        case .setAddress(let address):
+            return "/user/rest/v1/users/current/addresses/\(address.type)"
         }
     }
     
