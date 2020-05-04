@@ -202,4 +202,19 @@ class PayseraMokejimaiSDKTests: XCTestCase {
             credentials: credentials
         )
     }
+    
+    func testGetUserAccountsData() {
+        var object: [PSUserAccountData]?
+        let expectation = XCTestExpectation(description: "")
+        createMokejimaiApiClient()
+            .getUserAccountsData(id: 0000).done { result in
+                object = result.items
+            }.catch { error in
+                print(error)
+            }.finally {
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 10.0)
+        XCTAssertNotNil(object)
+    }
 }

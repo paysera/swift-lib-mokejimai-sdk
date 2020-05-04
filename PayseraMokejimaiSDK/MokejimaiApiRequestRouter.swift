@@ -6,6 +6,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     // MARK: - GET
     case getManualTransferConfiguration(filter: PSBaseFilter)
     case sendLog(userId: String, action: String, context:[String: String])
+    case getUserAccountsData(id: Int)
     // MARK: - POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
     case getAddresses
@@ -19,7 +20,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     private var method: HTTPMethod {
         switch self {
         case .getManualTransferConfiguration,
-             .getAddresses:
+             .getAddresses,
+             .getUserAccountsData:
             return .get
         case .createCompanyAccount,
              .sendLog:
@@ -42,6 +44,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/user/rest/v1/users/current/addresses"
         case .setAddress(let address):
             return "/user/rest/v1/users/current/addresses/\(address.type)"
+        case .getUserAccountsData(let id):
+            return "/user-accounts/rest/v1/accounts/\(id)"
         }
     }
     
