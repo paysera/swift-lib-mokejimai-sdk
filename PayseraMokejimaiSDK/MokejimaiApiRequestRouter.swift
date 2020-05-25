@@ -5,14 +5,17 @@ import PayseraCommonSDK
 public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     // MARK: - GET
     case getManualTransferConfiguration(filter: PSBaseFilter)
-    case sendLog(userId: String, action: String, context:[String: String])
     case getUserAccountsData(id: Int)
+    case getCurrentUserAddresses
+    case getUserAddresses(userIdentifier: String)
+    
     // MARK: - POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
-    case getAddresses
-    case setAddress(address: PSAddress)
+    case sendLog(userId: String, action: String, context:[String: String])
     
     // MARK: - PUT
+    case updateCurrentUserAddress(address: PSAddress)
+    case updateUserAddress(userIdentifier: String, address: PSAddress)
     
     // MARK: - Declarations
     static var baseURLString = "https://bank.paysera.com"
@@ -20,13 +23,15 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     private var method: HTTPMethod {
         switch self {
         case .getManualTransferConfiguration,
-             .getAddresses,
-             .getUserAccountsData:
+             .getCurrentUserAddresses,
+             .getUserAccountsData,
+             .getUserAddresses:
             return .get
         case .createCompanyAccount,
              .sendLog:
             return .post
-        case .setAddress:
+        case .updateCurrentUserAddress,
+             .updateUserAddress:
             return .put
         }
     }
@@ -40,12 +45,16 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/company-account/rest/v1/company-accounts"
         case .sendLog:
             return "/log/rest/v1/logs"
-        case .getAddresses:
+        case .getCurrentUserAddresses:
             return "/user/rest/v1/users/current/addresses"
-        case .setAddress(let address):
+        case .updateCurrentUserAddress(let address):
             return "/user/rest/v1/users/current/addresses/\(address.type)"
         case .getUserAccountsData(let id):
             return "/user-accounts/rest/v1/accounts/\(id)"
+        case .getUserAddresses(let userIdentifier):
+            return "/user/rest/v1/users/\(userIdentifier)/addresses"
+        case .updateUserAddress(let userIdentifier, let address):
+            return "/user/rest/v1/users/\(userIdentifier)/addresses/\(address.type)"
         }
     }
     
@@ -64,7 +73,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
                 "user_id": userId,
                 "context": context
             ]
-        case .setAddress(let address):
+        case .updateCurrentUserAddress(let address),
+             .updateUserAddress(_, let address):
             return address.toJSON()
         default: return nil
         }

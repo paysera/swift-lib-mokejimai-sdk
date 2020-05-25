@@ -6,12 +6,20 @@ import PayseraCommonSDK
 
 public class MokejimaiApiClient: PSBaseApiClient {
     
-    public func setAddress(_ address: PSAddress) -> Promise<PSAddress> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.setAddress(address: address))
+    public func getCurrentUserAddresses() -> Promise<PSMetadataAwareResponse<PSAddress>> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.getCurrentUserAddresses)
     }
     
-    public func getUserAddresses() -> Promise<PSMetadataAwareResponse<PSAddress>> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.getAddresses)
+    public func getUserAddresses(userIdentifier: String) -> Promise<PSMetadataAwareResponse<PSAddress>> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.getUserAddresses(userIdentifier: userIdentifier))
+    }
+    
+    public func updateCurrentUserAddress(_ address: PSAddress) -> Promise<PSAddress> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.updateCurrentUserAddress(address: address))
+    }
+    
+    public func updateUserAddress(userIdentifier: String, address: PSAddress) -> Promise<PSAddress> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.updateUserAddress(userIdentifier: userIdentifier, address: address))
     }
     
     public func getManualTransferConfiguration(filter: PSBaseFilter) -> Promise<PSMetadataAwareResponse<PSManualTransferConfiguration>> {
