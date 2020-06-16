@@ -53,7 +53,7 @@ public class MokejimaiApiClient: PSBaseApiClient {
         return doRequest(requestRouter: MokejimaiApiRequestRouter.getUserAccountsData(id: id))
     }
     
-    public func getAvailableIdentityDocuments(country: String) -> Promise<PSMetadataAwareResponse<PSIdentityDocument>> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.getAvailableIdentityDocuments(country: country))
+    public func getAvailableIdentityDocuments(filter: PSAvailableIdentityDocumentsFilter) -> Promise<PSMetadataAwareResponse<PSIdentityDocument>> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.getAvailableIdentityDocuments(filter: filter))
     }
 }

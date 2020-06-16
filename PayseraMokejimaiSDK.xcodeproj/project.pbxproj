@@ -25,6 +25,7 @@
 		748D8BC2242F4C360097529C /* PSAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BC1242F4C360097529C /* PSAddress.swift */; };
 		A750B2E1245FE4DD00FCD2CC /* PSUserAccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A750B2E0245FE4DD00FCD2CC /* PSUserAccountData.swift */; };
 		A774E5E32498B5DB0093FE00 /* PSIdentityDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A774E5E22498B5DB0093FE00 /* PSIdentityDocument.swift */; };
+		A774E5EC2498DBBF0093FE00 /* PSAvailableIdentityDocumentsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A774E5EB2498DBBF0093FE00 /* PSAvailableIdentityDocumentsFilter.swift */; };
 		ED8FB00222BA6DA700792600 /* PayseraCommonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		748D8BC1242F4C360097529C /* PSAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSAddress.swift; sourceTree = "<group>"; };
 		A750B2E0245FE4DD00FCD2CC /* PSUserAccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSUserAccountData.swift; sourceTree = "<group>"; };
 		A774E5E22498B5DB0093FE00 /* PSIdentityDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSIdentityDocument.swift; sourceTree = "<group>"; };
+		A774E5EB2498DBBF0093FE00 /* PSAvailableIdentityDocumentsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSAvailableIdentityDocumentsFilter.swift; sourceTree = "<group>"; };
 		ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PayseraCommonSDK.framework; path = "../swift-lib-accounts-sdk/Carthage/Build/iOS/PayseraCommonSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				A774E5E22498B5DB0093FE00 /* PSIdentityDocument.swift */,
+				A774E5EB2498DBBF0093FE00 /* PSAvailableIdentityDocumentsFilter.swift */,
 			);
 			path = Identification;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A774E5EC2498DBBF0093FE00 /* PSAvailableIdentityDocumentsFilter.swift in Sources */,
 				1CF95745221D74A0007DE4AA /* MokejimaiApiRequestRouter.swift in Sources */,
 				600E39B52397B04B005D7998 /* PSCompanyIdentifier.swift in Sources */,
 				600E39B32397AA9A005D7998 /* PSCompanyAccount.swift in Sources */,

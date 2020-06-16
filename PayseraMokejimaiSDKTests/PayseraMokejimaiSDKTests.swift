@@ -280,8 +280,10 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     func testGetAvailableIdentityDocuments() {
         var object: [PSIdentityDocument]?
         let expectation = XCTestExpectation(description: "")
+        let filter = PSAvailableIdentityDocumentsFilter()
+        filter.country = "lt"
         createMokejimaiApiClient()
-            .getAvailableIdentityDocuments(country: "lt").done { result in
+            .getAvailableIdentityDocuments(filter: filter).done { result in
                 object = result.items
             }.catch { error in
                 print(error)

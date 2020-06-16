@@ -8,7 +8,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case getUserAccountsData(id: Int)
     case getCurrentUserAddresses
     case getUserAddresses(userIdentifier: String)
-    case getAvailableIdentityDocuments(country: String)
+    case getAvailableIdentityDocuments(filter: PSAvailableIdentityDocumentsFilter)
     
     // MARK: - POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
@@ -58,7 +58,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
         case .updateUserAddress(let userIdentifier, let address):
             return "/user/rest/v1/users/\(userIdentifier)/addresses/\(address.type)"
         case .getAvailableIdentityDocuments:
-            return "identification/rest/v1/identity-document-illustrations"
+            return "/identification/rest/v1/identity-document-illustrations"
         }
     }
     
@@ -81,8 +81,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
              .updateUserAddress(_, let address):
             return address.toJSON()
             
-        case .getAvailableIdentityDocuments(let country):
-            return ["country": country]
+        case .getAvailableIdentityDocuments(let filter):
+            return filter.toJSON()
             
         default: return nil
         }
