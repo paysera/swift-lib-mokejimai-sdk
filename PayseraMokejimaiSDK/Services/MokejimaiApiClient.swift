@@ -52,4 +52,8 @@ public class MokejimaiApiClient: PSBaseApiClient {
     public func getUserAccountsData(id: Int) -> Promise<PSMetadataAwareResponse<PSUserAccountData>> {
         return doRequest(requestRouter: MokejimaiApiRequestRouter.getUserAccountsData(id: id))
     }
+    
+    public func getAvailableIdentityDocuments(country: String) -> Promise<PSMetadataAwareResponse<PSIdentityDocument>> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.getAvailableIdentityDocuments(country: country))
+    }
 }

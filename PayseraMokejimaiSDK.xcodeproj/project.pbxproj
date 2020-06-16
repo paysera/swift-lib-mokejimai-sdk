@@ -24,6 +24,7 @@
 		60FC8B0B239AC36200E22EDC /* PSCompanyTaskSolutionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */; };
 		748D8BC2242F4C360097529C /* PSAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748D8BC1242F4C360097529C /* PSAddress.swift */; };
 		A750B2E1245FE4DD00FCD2CC /* PSUserAccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A750B2E0245FE4DD00FCD2CC /* PSUserAccountData.swift */; };
+		A774E5E32498B5DB0093FE00 /* PSIdentityDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A774E5E22498B5DB0093FE00 /* PSIdentityDocument.swift */; };
 		ED8FB00222BA6DA700792600 /* PayseraCommonSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		60FC8B0A239AC36200E22EDC /* PSCompanyTaskSolutionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCompanyTaskSolutionError.swift; sourceTree = "<group>"; };
 		748D8BC1242F4C360097529C /* PSAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSAddress.swift; sourceTree = "<group>"; };
 		A750B2E0245FE4DD00FCD2CC /* PSUserAccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSUserAccountData.swift; sourceTree = "<group>"; };
+		A774E5E22498B5DB0093FE00 /* PSIdentityDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSIdentityDocument.swift; sourceTree = "<group>"; };
 		ED8FB00122BA6DA700792600 /* PayseraCommonSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PayseraCommonSDK.framework; path = "../swift-lib-accounts-sdk/Carthage/Build/iOS/PayseraCommonSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +140,7 @@
 		1CC63060221C11880092AF33 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				A774E5E12498B5750093FE00 /* Identification */,
 				A750B2DF245FE4B600FCD2CC /* User */,
 				748D8BC0242F4C1E0097529C /* Address */,
 				600E39B12397AA69005D7998 /* CompanyAccount */,
@@ -192,6 +195,14 @@
 				A750B2E0245FE4DD00FCD2CC /* PSUserAccountData.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		A774E5E12498B5750093FE00 /* Identification */ = {
+			isa = PBXGroup;
+			children = (
+				A774E5E22498B5DB0093FE00 /* PSIdentityDocument.swift */,
+			);
+			path = Identification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +355,7 @@
 				A750B2E1245FE4DD00FCD2CC /* PSUserAccountData.swift in Sources */,
 				60FC8B09239AC2B400E22EDC /* PSCompanyCreationType.swift in Sources */,
 				748D8BC2242F4C360097529C /* PSAddress.swift in Sources */,
+				A774E5E32498B5DB0093FE00 /* PSIdentityDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
