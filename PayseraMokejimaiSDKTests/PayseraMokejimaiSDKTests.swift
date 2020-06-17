@@ -276,4 +276,21 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
         XCTAssertNotNil(object)
     }
+    
+    func testGetAvailableIdentityDocuments() {
+        var object: [PSIdentityDocument]?
+        let expectation = XCTestExpectation(description: "")
+        let filter = PSAvailableIdentityDocumentsFilter()
+        filter.country = "lt"
+        createMokejimaiApiClient()
+            .getAvailableIdentityDocuments(filter: filter).done { result in
+                object = result.items
+            }.catch { error in
+                print(error)
+            }.finally {
+                expectation.fulfill()
+            }
+        wait(for: [expectation], timeout: 10.0)
+        XCTAssertNotNil(object)
+    }
 }
