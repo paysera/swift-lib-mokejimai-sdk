@@ -9,14 +9,26 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case getCurrentUserAddresses
     case getUserAddresses(userIdentifier: String)
     case getAvailableIdentityDocuments(filter: PSAvailableIdentityDocumentsFilter)
+    case getContactPhones(filter: PSContactFilter)
+    case getContactEmails(filter: PSContactFilter)
     
     // MARK: - POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
     case sendLog(userId: String, action: String, context:[String: String])
+    case addContactPhone(request: PSAddContactPhoneRequest)
+    case addContactEmail(request: PSAddContactEmailRequest)
     
     // MARK: - PUT
     case updateCurrentUserAddress(address: PSAddress)
     case updateUserAddress(userIdentifier: String, address: PSAddress)
+    case confirmContactPhone(id: String, code: String)
+    case setContactPhoneAsMain(id: Int)
+    case confirmContactEmail(id: String, code: String)
+    case setContactEmailAsMain(id: Int)
+    
+    // MARK: - DELETE
+    case deleteContactPhone(id: Int)
+    case deleteContactEmail(id: Int)
     
     // MARK: - Declarations
     static var baseURLString = "https://bank.paysera.com"
@@ -27,14 +39,25 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
              .getCurrentUserAddresses,
              .getUserAccountsData,
              .getUserAddresses,
-             .getAvailableIdentityDocuments:
+             .getAvailableIdentityDocuments,
+             .getContactPhones,
+             .getContactEmails:
             return .get
         case .createCompanyAccount,
-             .sendLog:
+             .sendLog,
+             .addContactPhone,
+             .addContactEmail:
             return .post
         case .updateCurrentUserAddress,
-             .updateUserAddress:
+             .updateUserAddress,
+             .confirmContactPhone,
+             .setContactPhoneAsMain,
+             .confirmContactEmail,
+             .setContactEmailAsMain:
             return .put
+        case .deleteContactPhone,
+             .deleteContactEmail:
+            return .delete
         }
     }
     
@@ -59,6 +82,24 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/user/rest/v1/users/\(userIdentifier)/addresses/\(address.type)"
         case .getAvailableIdentityDocuments:
             return "/identification/rest/v1/identity-document-illustrations"
+        case .getContactPhones,
+             .addContactPhone:
+            return "/contact/rest/v1/phones"
+        case .deleteContactPhone(let id):
+            return "/contact/rest/v1/phones/\(id)"
+        case .confirmContactPhone(let id, _):
+            return "/contact/rest/v1/phones/\(id)/confirm"
+        case .setContactPhoneAsMain(let id):
+            return "/contact/rest/v1/phones/\(id)/main"
+        case .getContactEmails,
+             .addContactEmail:
+            return "/contact/rest/v1/emails"
+        case .deleteContactEmail(let id):
+            return "/contact/rest/v1/emails/\(id)"
+        case .confirmContactEmail(let id, _):
+            return "/contact/rest/v1/emails/\(id)/confirm"
+        case .setContactEmailAsMain(let id):
+            return "/contact/rest/v1/emails/\(id)/main"
         }
     }
     
@@ -83,6 +124,20 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             
         case .getAvailableIdentityDocuments(let filter):
             return filter.toJSON()
+            
+        case .getContactPhones(let filter),
+             .getContactEmails(let filter):
+            return filter.toJSON()
+            
+        case .addContactPhone(let request):
+            return request.toJSON()
+            
+        case .confirmContactPhone(_, let code),
+             .confirmContactEmail(_, let code):
+            return ["code": code]
+            
+        case .addContactEmail(let request):
+            return request.toJSON()
             
         default: return nil
         }
