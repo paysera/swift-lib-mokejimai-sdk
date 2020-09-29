@@ -293,4 +293,161 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
         XCTAssertNotNil(object)
     }
+    
+    func testGetContactPhones() {
+        let expectation = XCTestExpectation(description: "Contact phones should be returned")
+        var response: PSMetadataAwareResponse<PSContactPhone>?
+        let filter = PSContactFilter()
+        filter.userId = 1337
+
+        createMokejimaiApiClient()
+            .getContactPhones(filter: filter)
+            .done { response = $0 }
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertNotNil(response)
+    }
+    
+    func testDeleteContactPhone() {
+        let expectation = XCTestExpectation(description: "Given contact phone should be deleted")
+        let id = 1337
+
+        createMokejimaiApiClient()
+            .deleteContactPhone(id: id)
+            .done {}
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testAddContactPhone() {
+        let expectation = XCTestExpectation(description: "Given contact phone should be added")
+        var response: PSContactPhone?
+        let request = PSAddContactPhoneRequest(
+            userId: "1337",
+            number: "+37069999999",
+            status: "active"
+        )
+
+        createMokejimaiApiClient()
+            .addContactPhone(request: request)
+            .done { response = $0 }
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertNotNil(response)
+    }
+    
+    func testConfirmContactPhone() {
+        let expectation = XCTestExpectation(description: "Phone should be confirmed")
+        var response: PSContactPhone?
+        let id = "1337"
+        let code = "1337"
+
+        createMokejimaiApiClient()
+            .confirmContactPhone(id: id, code: code)
+            .done { response = $0 }
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertNotNil(response)
+    }
+    
+    func testSetContactPhoneAsMain() {
+        let expectation = XCTestExpectation(description: "Contact phone should be set as main")
+        var response: PSContactPhone?
+        let id = 1337
+
+        createMokejimaiApiClient()
+            .setContactPhoneAsMain(id: id)
+            .done { response = $0 }
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertNotNil(response)
+    }
+    
+    func testGetContactEmails() {
+        let expectation = XCTestExpectation(description: "Contact emails should be returned")
+        var response: PSMetadataAwareResponse<PSContactEmail>?
+        let filter = PSContactFilter()
+        filter.userId = 1337
+
+        createMokejimaiApiClient()
+            .getContactEmails(filter: filter)
+            .done { response = $0 }
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertNotNil(response)
+    }
+    
+    func testDeleteContactEmail() {
+        let expectation = XCTestExpectation(description: "Given contact email should be deleted")
+        let id = 1337
+
+        createMokejimaiApiClient()
+            .deleteContactEmail(id: id)
+            .done {}
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testAddContactEmail() {
+        let expectation = XCTestExpectation(description: "Given contact email should be added")
+        var response: PSContactEmail?
+        let request = PSAddContactEmailRequest(
+            userId: "1337",
+            email: "1337@gmail.com"
+        )
+
+        createMokejimaiApiClient()
+            .addContactEmail(request: request)
+            .done { response = $0 }
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+        
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertNotNil(response)
+    }
+    
+    func testConfirmContactEmail() {
+        let expectation = XCTestExpectation(description: "Email should be confirmed")
+        var response: PSContactEmail?
+        let id = "1337"
+        let code = "696969"
+
+        createMokejimaiApiClient()
+            .confirmContactEmail(id: id, code: code)
+            .done { response = $0 }
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertNotNil(response)
+    }
+    
+    func testSetContactEmailAsMain() {
+        let expectation = XCTestExpectation(description: "Contact email should be set as main")
+        var response: PSContactEmail?
+        let id = 1337
+
+        createMokejimaiApiClient()
+            .setContactEmailAsMain(id: id)
+            .done { response = $0 }
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 5.0)
+        XCTAssertNotNil(response)
+    }
 }

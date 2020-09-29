@@ -56,4 +56,44 @@ public class MokejimaiApiClient: PSBaseApiClient {
     public func getAvailableIdentityDocuments(filter: PSAvailableIdentityDocumentsFilter) -> Promise<PSMetadataAwareResponse<PSIdentityDocument>> {
         return doRequest(requestRouter: MokejimaiApiRequestRouter.getAvailableIdentityDocuments(filter: filter))
     }
+    
+    public func getContactPhones(filter: PSContactFilter) -> Promise<PSMetadataAwareResponse<PSContactPhone>> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.getContactPhones(filter: filter))
+    }
+    
+    public func deleteContactPhone(id: Int) -> Promise<Void> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.deleteContactPhone(id: id))
+    }
+    
+    public func addContactPhone(request: PSAddContactPhoneRequest) -> Promise<PSContactPhone> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.addContactPhone(request: request))
+    }
+    
+    public func confirmContactPhone(id: String, code: String) -> Promise<PSContactPhone> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.confirmContactPhone(id: id, code: code))
+    }
+    
+    public func setContactPhoneAsMain(id: Int) -> Promise<PSContactPhone> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.setContactPhoneAsMain(id: id))
+    }
+    
+    public func getContactEmails(filter: PSContactFilter) -> Promise<PSMetadataAwareResponse<PSContactEmail>> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.getContactEmails(filter: filter))
+    }
+    
+    public func deleteContactEmail(id: Int) -> Promise<Void> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.deleteContactEmail(id: id))
+    }
+    
+    public func addContactEmail(request: PSAddContactEmailRequest) -> Promise<PSContactEmail> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.addContactEmail(request: request))
+    }
+    
+    public func confirmContactEmail(id: String, code: String) -> Promise<PSContactEmail> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.confirmContactEmail(id: id, code: code))
+    }
+    
+    public func setContactEmailAsMain(id: Int) -> Promise<PSContactEmail> {
+        return doRequest(requestRouter: MokejimaiApiRequestRouter.setContactEmailAsMain(id: id))
+    }
 }
