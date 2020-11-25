@@ -11,6 +11,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case getAvailableIdentityDocuments(filter: PSAvailableIdentityDocumentsFilter)
     case getContactPhones(filter: PSContactFilter)
     case getContactEmails(filter: PSContactFilter)
+    case getIdentityDocuments(userId: String, filter: PSBaseFilter)
     
     // MARK: - POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
@@ -41,7 +42,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
              .getUserAddresses,
              .getAvailableIdentityDocuments,
              .getContactPhones,
-             .getContactEmails:
+             .getContactEmails,
+             .getIdentityDocuments:
             return .get
         case .createCompanyAccount,
              .sendLog,
@@ -100,6 +102,8 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return "/contact/rest/v1/emails/\(id)/confirm"
         case .setContactEmailAsMain(let id):
             return "/contact/rest/v1/emails/\(id)/main"
+        case .getIdentityDocuments:
+            return "/identity-document/rest/v1/identity-documents"
         }
     }
     
@@ -138,6 +142,11 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             
         case .addContactEmail(let request):
             return request.toJSON()
+            
+        case .getIdentityDocuments(let userId, let filter):
+            var queryParameters = filter.toJSON()
+            queryParameters["user_id"] = userId
+            return queryParameters
             
         default: return nil
         }

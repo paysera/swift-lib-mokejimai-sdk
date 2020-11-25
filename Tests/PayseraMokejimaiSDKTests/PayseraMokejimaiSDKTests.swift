@@ -450,4 +450,28 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         wait(for: [expectation], timeout: 5.0)
         XCTAssertNotNil(response)
     }
+    
+    func testGetUploadedIdentityDocuments() {
+        var object: [PSUploadedIdentityDocument]?
+        let expectation = XCTestExpectation(description: "")
+        
+        let filter = PSBaseFilter()
+        filter.limit = 10
+        filter.offset = 0
+        
+        createMokejimaiApiClient()
+            .getIdentityDocuments(userId: "", filter: filter)
+            .done { response in
+                object = response.items
+            }
+            .catch { error in
+                XCTFail(error.localizedDescription)
+            }
+            .finally {
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 3.0)
+        XCTAssertNotNil(object)
+    }
 }
