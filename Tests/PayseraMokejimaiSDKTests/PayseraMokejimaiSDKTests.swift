@@ -455,8 +455,12 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         var object: [PSUploadedIdentityDocument]?
         let expectation = XCTestExpectation(description: "")
         
+        let filter = PSBaseFilter()
+        filter.limit = 10
+        filter.offset = 0
+        
         createMokejimaiApiClient()
-            .getIdentityDocuments(userId: "")
+            .getIdentityDocuments(userId: "", filter: filter)
             .done { response in
                 object = response.items
             }
