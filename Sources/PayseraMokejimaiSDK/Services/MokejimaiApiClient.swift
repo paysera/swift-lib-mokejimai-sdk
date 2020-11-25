@@ -96,4 +96,8 @@ public class MokejimaiApiClient: PSBaseApiClient {
     public func setContactEmailAsMain(id: Int) -> Promise<PSContactEmail> {
         return doRequest(requestRouter: MokejimaiApiRequestRouter.setContactEmailAsMain(id: id))
     }
+    
+    public func getIdentityDocuments(userId: String) -> Promise<PSMetadataAwareResponse<PSUploadedIdentityDocument>> {
+        doRequest(requestRouter: MokejimaiApiRequestRouter.getIdentityDocuments(userId: userId))
+    }
 }
