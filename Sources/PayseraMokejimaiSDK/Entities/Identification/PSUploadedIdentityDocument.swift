@@ -4,7 +4,7 @@ public class PSUploadedIdentityDocument: Mappable {
     
     public var id: Int!
     public var type: String!
-    public var dateOfExpiry: String!
+    public var dateOfExpiry: String?
     public var reviewStatus: String!
     
     public init() {}
