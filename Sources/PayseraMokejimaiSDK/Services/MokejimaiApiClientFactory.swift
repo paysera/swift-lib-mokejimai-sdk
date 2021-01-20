@@ -10,13 +10,10 @@ public class MokejimaiApiClientFactory {
         logger: PSLoggerProtocol? = nil
     ) -> MokejimaiApiClient {
         let interceptor = PSRequestAdapter(credentials: credentials, headers: headers)
-        let trustedSession = PSTrustedSession(
-            interceptor: interceptor,
-            hosts: ["bank.paysera.com"]
-        )
+        let session = Session(interceptor: interceptor)
         
         return MokejimaiApiClient(
-            session: trustedSession,
+            session: session,
             credentials: credentials,
             tokenRefresher: tokenRefresher,
             logger: logger
