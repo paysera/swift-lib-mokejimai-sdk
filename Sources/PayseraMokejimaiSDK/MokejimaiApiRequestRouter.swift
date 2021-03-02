@@ -1,5 +1,5 @@
-import Foundation
 import Alamofire
+import Foundation
 import PayseraCommonSDK
 
 public enum MokejimaiApiRequestRouter: URLRequestConvertible {
@@ -32,7 +32,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case deleteContactEmail(id: Int)
     
     // MARK: - Declarations
-    static var baseURLString = "https://bank.paysera.com"
+    static let baseURL = URL(string: "https://bank.paysera.com")!
     
     private var method: HTTPMethod {
         switch self {
@@ -66,7 +66,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     private var path: String {
         switch self {
             
-        case .getManualTransferConfiguration(_):
+        case .getManualTransferConfiguration:
             return "/manual-transfer-configuration/rest/v1/configurations"
         case .createCompanyAccount:
             return "/company-account/rest/v1/company-accounts"
@@ -148,25 +148,25 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             queryParameters["user_id"] = userId
             return queryParameters
             
-        default: return nil
+        default:
+            return nil
         }
     }
     
     // MARK: - Method
     public func asURLRequest() throws -> URLRequest {
+        let url = Self.baseURL.appendingPathComponent(path)
+        var urlRequest = URLRequest(url: url)
+        urlRequest.method = method
         
-        let requestMethod = method
-        let url = try! MokejimaiApiRequestRouter.baseURLString.asURL()
-        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
-        urlRequest.httpMethod = requestMethod.rawValue
-        
-        switch requestMethod {
+        switch method {
         case .post,
              .put:
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         default:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         }
+        
         return urlRequest
     }
 }
