@@ -1,37 +1,55 @@
-import Foundation
-import Alamofire
-import PromiseKit
-import ObjectMapper
 import PayseraCommonSDK
+import PromiseKit
 
 public class MokejimaiApiClient: PSBaseApiClient {
     
     public func getCurrentUserAddresses() -> Promise<PSMetadataAwareResponse<PSAddress>> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.getCurrentUserAddresses)
+        doRequest(requestRouter: MokejimaiApiRequestRouter.getCurrentUserAddresses)
     }
     
-    public func getUserAddresses(userIdentifier: String) -> Promise<PSMetadataAwareResponse<PSAddress>> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.getUserAddresses(userIdentifier: userIdentifier))
+    public func getUserAddresses(
+        userIdentifier: String
+    ) -> Promise<PSMetadataAwareResponse<PSAddress>> {
+        doRequest(
+            requestRouter: MokejimaiApiRequestRouter.getUserAddresses(
+                userIdentifier: userIdentifier
+            )
+        )
     }
     
     public func updateCurrentUserAddress(_ address: PSAddress) -> Promise<PSAddress> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.updateCurrentUserAddress(address: address))
+        doRequest(
+            requestRouter: MokejimaiApiRequestRouter.updateCurrentUserAddress(address: address)
+        )
     }
     
-    public func updateUserAddress(userIdentifier: String, address: PSAddress) -> Promise<PSAddress> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.updateUserAddress(userIdentifier: userIdentifier, address: address))
+    public func updateUserAddress(
+        userIdentifier: String,
+        address: PSAddress
+    ) -> Promise<PSAddress> {
+        doRequest(
+            requestRouter: MokejimaiApiRequestRouter.updateUserAddress(
+                userIdentifier: userIdentifier,
+                address: address
+            )
+        )
     }
     
-    public func getManualTransferConfiguration(filter: PSBaseFilter) -> Promise<PSMetadataAwareResponse<PSManualTransferConfiguration>> {
-        return doRequest(
+    public func getManualTransferConfiguration(
+        filter: PSBaseFilter
+    ) -> Promise<PSMetadataAwareResponse<PSManualTransferConfiguration>> {
+        doRequest(
             requestRouter: MokejimaiApiRequestRouter.getManualTransferConfiguration(
                 filter: filter
             )
         )
     }
     
-    public func createCompanyAccount(userId: Int, using creationType: PSCompanyCreationType) -> Promise<PSCompanyAccount> {
-        return doRequest(
+    public func createCompanyAccount(
+        userId: Int,
+        using creationType: PSCompanyCreationType
+    ) -> Promise<PSCompanyAccount> {
+        doRequest(
             requestRouter: MokejimaiApiRequestRouter.createCompanyAccount(
                 userId: userId,
                 creationType: creationType
@@ -39,8 +57,8 @@ public class MokejimaiApiClient: PSBaseApiClient {
         )
     }
 
-    public func sendLog(userId: String, action: String, context:[String: String]) -> Promise<Any>{
-        return doRequest(
+    public func sendLog(userId: String, action: String, context:[String: String]) -> Promise<Any> {
+        doRequest(
             requestRouter: MokejimaiApiRequestRouter.sendLog(
                 userId: userId,
                 action: action,
@@ -49,55 +67,73 @@ public class MokejimaiApiClient: PSBaseApiClient {
         )
     }
     
-    public func getUserAccountsData(id: Int) -> Promise<PSMetadataAwareResponse<PSUserAccountData>> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.getUserAccountsData(id: id))
+    public func getUserAccountsData(
+        id: Int
+    ) -> Promise<PSMetadataAwareResponse<PSUserAccountData>> {
+        doRequest(requestRouter: MokejimaiApiRequestRouter.getUserAccountsData(id: id))
     }
     
-    public func getAvailableIdentityDocuments(filter: PSAvailableIdentityDocumentsFilter) -> Promise<PSMetadataAwareResponse<PSIdentityDocument>> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.getAvailableIdentityDocuments(filter: filter))
+    public func getAvailableIdentityDocuments(
+        filter: PSAvailableIdentityDocumentsFilter
+    ) -> Promise<PSMetadataAwareResponse<PSIdentityDocument>> {
+        doRequest(
+            requestRouter: MokejimaiApiRequestRouter.getAvailableIdentityDocuments(filter: filter)
+        )
     }
     
-    public func getContactPhones(filter: PSContactFilter) -> Promise<PSMetadataAwareResponse<PSContactPhone>> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.getContactPhones(filter: filter))
+    public func getContactPhones(
+        filter: PSContactFilter
+    ) -> Promise<PSMetadataAwareResponse<PSContactPhone>> {
+        doRequest(requestRouter: MokejimaiApiRequestRouter.getContactPhones(filter: filter))
     }
     
     public func deleteContactPhone(id: Int) -> Promise<Void> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.deleteContactPhone(id: id))
+        doRequest(requestRouter: MokejimaiApiRequestRouter.deleteContactPhone(id: id))
     }
     
     public func addContactPhone(request: PSAddContactPhoneRequest) -> Promise<PSContactPhone> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.addContactPhone(request: request))
+        doRequest(requestRouter: MokejimaiApiRequestRouter.addContactPhone(request: request))
     }
     
     public func confirmContactPhone(id: String, code: String) -> Promise<PSContactPhone> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.confirmContactPhone(id: id, code: code))
+        doRequest(requestRouter: MokejimaiApiRequestRouter.confirmContactPhone(id: id, code: code))
     }
     
     public func setContactPhoneAsMain(id: Int) -> Promise<PSContactPhone> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.setContactPhoneAsMain(id: id))
+        doRequest(requestRouter: MokejimaiApiRequestRouter.setContactPhoneAsMain(id: id))
     }
     
-    public func getContactEmails(filter: PSContactFilter) -> Promise<PSMetadataAwareResponse<PSContactEmail>> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.getContactEmails(filter: filter))
+    public func getContactEmails(
+        filter: PSContactFilter
+    ) -> Promise<PSMetadataAwareResponse<PSContactEmail>> {
+        doRequest(requestRouter: MokejimaiApiRequestRouter.getContactEmails(filter: filter))
     }
     
     public func deleteContactEmail(id: Int) -> Promise<Void> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.deleteContactEmail(id: id))
+        doRequest(requestRouter: MokejimaiApiRequestRouter.deleteContactEmail(id: id))
     }
     
     public func addContactEmail(request: PSAddContactEmailRequest) -> Promise<PSContactEmail> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.addContactEmail(request: request))
+        doRequest(requestRouter: MokejimaiApiRequestRouter.addContactEmail(request: request))
     }
     
     public func confirmContactEmail(id: String, code: String) -> Promise<PSContactEmail> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.confirmContactEmail(id: id, code: code))
+        doRequest(requestRouter: MokejimaiApiRequestRouter.confirmContactEmail(id: id, code: code))
     }
     
     public func setContactEmailAsMain(id: Int) -> Promise<PSContactEmail> {
-        return doRequest(requestRouter: MokejimaiApiRequestRouter.setContactEmailAsMain(id: id))
+        doRequest(requestRouter: MokejimaiApiRequestRouter.setContactEmailAsMain(id: id))
     }
     
-    public func getIdentityDocuments(userId: String, filter: PSBaseFilter) -> Promise<PSMetadataAwareResponse<PSUploadedIdentityDocument>> {
-        doRequest(requestRouter: MokejimaiApiRequestRouter.getIdentityDocuments(userId: userId, filter: filter))
+    public func getIdentityDocuments(
+        userId: String,
+        filter: PSBaseFilter
+    ) -> Promise<PSMetadataAwareResponse<PSUploadedIdentityDocument>> {
+        doRequest(
+            requestRouter: MokejimaiApiRequestRouter.getIdentityDocuments(
+                userId: userId,
+                filter: filter
+            )
+        )
     }
 }

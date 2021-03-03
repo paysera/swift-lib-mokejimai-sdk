@@ -1,5 +1,3 @@
-import Foundation
-
 public enum PSCompanyCreationType {
     case task(PSCompanyTask)
     case identifier(PSCompanyIdentifier)

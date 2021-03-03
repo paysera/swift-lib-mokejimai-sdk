@@ -78,34 +78,34 @@ class PayseraMokejimaiSDKTests: XCTestCase {
     }
     
     func testCreatinngBulgarianCompanyAccount() {
-            var companyAccount: PSCompanyAccount?
-            var apiError: PSApiError?
-            var solutionError: PSCompanyTaskSolutionError?
-            let userId: Int = 0 // change me
-            let expectation = XCTestExpectation(description: "createCompanyAccount should return some response")
-            let companyIdentifier = PSCompanyIdentifier(countryCode: "BG", companyCode: "204037635")
-            
-            createMokejimaiApiClient()
-                .createCompanyAccount(userId: userId, using: .identifier(companyIdentifier))
-                .done { response in
-                    companyAccount = response
+        var companyAccount: PSCompanyAccount?
+        var apiError: PSApiError?
+        var solutionError: PSCompanyTaskSolutionError?
+        let userId: Int = 0 // change me
+        let expectation = XCTestExpectation(description: "createCompanyAccount should return some response")
+        let companyIdentifier = PSCompanyIdentifier(countryCode: "BG", companyCode: "204037635")
+        
+        createMokejimaiApiClient()
+            .createCompanyAccount(userId: userId, using: .identifier(companyIdentifier))
+            .done { response in
+                companyAccount = response
+            }
+            .catch { error in
+                apiError = error as? PSApiError
+                if let json = apiError?.data as? [String: Any] {
+                    solutionError = PSCompanyTaskSolutionError(JSON: json)
                 }
-                .catch { error in
-                    apiError = error as? PSApiError
-                    if let json = apiError?.data as? [String: Any] {
-                        solutionError = PSCompanyTaskSolutionError(JSON: json)
-                    }
-                    print(apiError?.toJSON() ?? "")
-                }
-                .finally {
-                    expectation.fulfill()
-                }
+                print(apiError?.toJSON() ?? "")
+            }
+            .finally {
+                expectation.fulfill()
+            }
 
-            wait(for: [expectation], timeout: 10.0)
-            
-            XCTAssertNotNil(apiError)
-            XCTAssertNotNil(solutionError)
-            XCTAssertEqual(apiError?.error, "task_solution_required")
+        wait(for: [expectation], timeout: 10.0)
+        
+        XCTAssertNotNil(apiError)
+        XCTAssertNotNil(solutionError)
+        XCTAssertEqual(apiError?.error, "task_solution_required")
     }
     
     func testSolvingTask() {
