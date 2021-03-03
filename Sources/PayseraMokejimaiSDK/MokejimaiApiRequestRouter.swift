@@ -2,7 +2,7 @@ import Alamofire
 import Foundation
 import PayseraCommonSDK
 
-public enum MokejimaiApiRequestRouter: URLRequestConvertible {
+enum MokejimaiApiRequestRouter {
     // MARK: - GET
     case getManualTransferConfiguration(filter: PSBaseFilter)
     case getUserAccountsData(id: Int)
@@ -32,7 +32,7 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
     case deleteContactEmail(id: Int)
     
     // MARK: - Declarations
-    static let baseURL = URL(string: "https://bank.paysera.com")!
+    private static let baseURL = URL(string: "https://bank.paysera.com")!
     
     private var method: HTTPMethod {
         switch self {
@@ -152,9 +152,10 @@ public enum MokejimaiApiRequestRouter: URLRequestConvertible {
             return nil
         }
     }
-    
-    // MARK: - Method
-    public func asURLRequest() throws -> URLRequest {
+}
+
+extension MokejimaiApiRequestRouter: URLRequestConvertible {
+    func asURLRequest() throws -> URLRequest {
         let url = Self.baseURL.appendingPathComponent(path)
         var urlRequest = URLRequest(url: url)
         urlRequest.method = method
