@@ -1,3 +1,4 @@
+import Foundation
 import ObjectMapper
 
 public class PSAddress: Mappable {
@@ -12,6 +13,7 @@ public class PSAddress: Mappable {
     public var streetName: String!
     public var houseNumber: String!
     public var apartmentNumber: String!
+    public var updatedAt: Date?
 
     public init() {}
     
@@ -30,5 +32,6 @@ public class PSAddress: Mappable {
         streetName <- map["street_name"]
         houseNumber <- map["house_number"]
         apartmentNumber <- map["apartment_number"]
+        updatedAt <- (map["updated_at"], DateTransform())
     }
 }
