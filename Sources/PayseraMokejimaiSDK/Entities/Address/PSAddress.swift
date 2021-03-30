@@ -1,5 +1,5 @@
-import ObjectMapper
 import Foundation
+import ObjectMapper
 
 public class PSAddress: Mappable {
     public var type: String = ""
