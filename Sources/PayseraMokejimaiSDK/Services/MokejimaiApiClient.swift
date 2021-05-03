@@ -140,4 +140,8 @@ public class MokejimaiApiClient: PSBaseApiClient {
     public func uploadAvatar(request: PSUploadAvatarRequest) -> Promise<Void> {
         doRequest(requestRouter: MokejimaiApiRequestRouter.uploadAvatar(request: request))
     }
+    
+    public func disableAvatar(userID: String) -> Promise<Void> {
+        doRequest(requestRouter: MokejimaiApiRequestRouter.disableAvatar(userID: userID))
+    }
 }

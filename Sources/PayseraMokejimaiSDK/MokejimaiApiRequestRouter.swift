@@ -27,6 +27,7 @@ enum MokejimaiApiRequestRouter {
     case confirmContactEmail(id: String, code: String)
     case setContactEmailAsMain(id: Int)
     case uploadAvatar(request: PSUploadAvatarRequest)
+    case disableAvatar(userID: String)
     
     // MARK: - DELETE
     case deleteContactPhone(id: Int)
@@ -57,7 +58,8 @@ enum MokejimaiApiRequestRouter {
              .setContactPhoneAsMain,
              .confirmContactEmail,
              .setContactEmailAsMain,
-             .uploadAvatar:
+             .uploadAvatar,
+             .disableAvatar:
             return .put
         case .deleteContactPhone,
              .deleteContactEmail:
@@ -108,6 +110,8 @@ enum MokejimaiApiRequestRouter {
             return "/identity-document/rest/v1/identity-documents"
         case .uploadAvatar:
             return "avatar/rest/v1/avatars"
+        case .disableAvatar(let userID):
+            return "avatar/rest/v1/avatars/\(userID)/disable"
         }
     }
     
