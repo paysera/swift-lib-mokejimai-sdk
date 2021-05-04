@@ -6,7 +6,7 @@ import PromiseKit
 @testable import PayseraMokejimaiSDK
 
 class PayseraMokejimaiSDKTests: XCTestCase {
-    private let jwtToken = ""
+    private let jwtToken = "insert_me"
     private let language = "en"
 
     func testSendLog() {
