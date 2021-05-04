@@ -15,7 +15,7 @@ public class PSUploadAvatarRequest: Mappable {
     required public init?(map: Map) {}
     
     public func mapping(map: Map) {
-        userId  <- map["user_id"]
-        contents   <- map["contents"]
+        userId      <- map["user_id"]
+        contents    <- map["contents"]
     }
 }
