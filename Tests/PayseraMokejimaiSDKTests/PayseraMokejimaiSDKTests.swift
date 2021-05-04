@@ -27,6 +27,39 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0)
     }
+    
+    func testUploadAvatar() {
+        let userId = ""
+        let base64EncodedImage = ""
+        
+        let expectation = XCTestExpectation(description: "")
+        
+        createMokejimaiApiClient()
+            .uploadAvatar(request: .init(userId: userId, contents: base64EncodedImage))
+            .done { response in
+                print(response)
+            }.catch { error in
+                print((error as? PSApiError)?.toJSON() ?? "")
+            }.finally { expectation.fulfill() }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    func testDisableAvatar() {
+        let userId = ""
+        
+        let expectation = XCTestExpectation(description: "")
+        
+        createMokejimaiApiClient()
+            .disableAvatar(userID: userId)
+            .done { response in
+                print(response)
+            }.catch { error in
+                print((error as? PSApiError)?.toJSON() ?? "")
+            }.finally { expectation.fulfill() }
+        
+        wait(for: [expectation], timeout: 5.0)
+    }
 
     func testGetManualTransferConfiguration() {
         var transferConfigurations: [PSManualTransferConfiguration]?
