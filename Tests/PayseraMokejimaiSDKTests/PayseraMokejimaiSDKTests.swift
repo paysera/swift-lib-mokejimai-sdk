@@ -315,6 +315,7 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         let expectation = XCTestExpectation(description: "")
         let filter = PSAvailableIdentityDocumentsFilter()
         filter.country = "lt"
+        filter.userId = "insert_me"
         createMokejimaiApiClient()
             .getAvailableIdentityDocuments(filter: filter).done { result in
                 object = result.items
