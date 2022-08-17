@@ -28,6 +28,8 @@ enum MokejimaiApiRequestRouter {
     case setContactEmailAsMain(id: Int)
     case uploadAvatar(request: PSUploadAvatarRequest)
     case disableAvatar(userID: String)
+    case requestDeletion
+    case requestDeletionCancel
     
     // MARK: - DELETE
     case deleteContactPhone(id: Int)
@@ -35,6 +37,11 @@ enum MokejimaiApiRequestRouter {
     
     // MARK: - Declarations
     private static let baseURL = URL(string: "https://bank.paysera.com")!
+    private static let usersRoute = "/user/rest/v1/users"
+    private static let contactRoute = "/contact/rest/v1"
+    private static let phonesRoute = Self.contactRoute + "/phones"
+    private static let emailsRoute = Self.contactRoute + "/emails"
+    private static let avatarsRoute = "avatar/rest/v1/avatars"
     
     private var method: HTTPMethod {
         switch self {
@@ -59,7 +66,9 @@ enum MokejimaiApiRequestRouter {
              .confirmContactEmail,
              .setContactEmailAsMain,
              .uploadAvatar,
-             .disableAvatar:
+             .disableAvatar,
+             .requestDeletion,
+             .requestDeletionCancel:
             return .put
         case .deleteContactPhone,
              .deleteContactEmail:
@@ -77,41 +86,45 @@ enum MokejimaiApiRequestRouter {
         case .sendLog:
             return "/log/rest/v1/logs"
         case .getCurrentUserAddresses:
-            return "/user/rest/v1/users/current/addresses"
+            return Self.usersRoute + "/current/addresses"
         case .updateCurrentUserAddress(let address):
-            return "/user/rest/v1/users/current/addresses/\(address.type)"
+            return Self.usersRoute + "/current/addresses/\(address.type)"
         case .getUserAccountsData(let id):
             return "/user-accounts/rest/v1/accounts/\(id)"
         case .getUserAddresses(let userIdentifier):
-            return "/user/rest/v1/users/\(userIdentifier)/addresses"
+            return Self.usersRoute + "/\(userIdentifier)/addresses"
         case .updateUserAddress(let userIdentifier, let address):
-            return "/user/rest/v1/users/\(userIdentifier)/addresses/\(address.type)"
+            return Self.usersRoute + "/\(userIdentifier)/addresses/\(address.type)"
         case .getAvailableIdentityDocuments:
             return "/identification/rest/v1/identity-document-illustrations"
+        case .requestDeletion:
+            return Self.usersRoute + "/me/request-deletion"
+        case .requestDeletionCancel:
+            return Self.usersRoute + "/me/request-deletion-cancel"
         case .getContactPhones,
              .addContactPhone:
-            return "/contact/rest/v1/phones"
+            return Self.phonesRoute
         case .deleteContactPhone(let id):
-            return "/contact/rest/v1/phones/\(id)"
+            return Self.phonesRoute + "/\(id)"
         case .confirmContactPhone(let id, _):
-            return "/contact/rest/v1/phones/\(id)/confirm"
+            return Self.phonesRoute + "/\(id)/confirm"
         case .setContactPhoneAsMain(let id):
-            return "/contact/rest/v1/phones/\(id)/main"
+            return Self.phonesRoute + "/\(id)/main"
         case .getContactEmails,
              .addContactEmail:
-            return "/contact/rest/v1/emails"
+            return Self.emailsRoute
         case .deleteContactEmail(let id):
-            return "/contact/rest/v1/emails/\(id)"
+            return Self.emailsRoute + "/\(id)"
         case .confirmContactEmail(let id, _):
-            return "/contact/rest/v1/emails/\(id)/confirm"
+            return Self.emailsRoute + "/\(id)/confirm"
         case .setContactEmailAsMain(let id):
-            return "/contact/rest/v1/emails/\(id)/main"
+            return Self.emailsRoute + "/\(id)/main"
         case .getIdentityDocuments:
             return "/identity-document/rest/v1/identity-documents"
         case .uploadAvatar:
-            return "avatar/rest/v1/avatars"
+            return Self.avatarsRoute
         case .disableAvatar(let userID):
-            return "avatar/rest/v1/avatars/\(userID)/disable"
+            return Self.avatarsRoute + "/\(userID)/disable"
         }
     }
     
