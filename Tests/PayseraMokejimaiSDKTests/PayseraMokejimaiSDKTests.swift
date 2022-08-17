@@ -513,15 +513,9 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         
         createMokejimaiApiClient()
             .requestAccountDeletion()
-            .done { response in
-                print(response)
-            }
-            .catch { error in
-                XCTFail(error.localizedDescription)
-            }
-            .finally {
-                expectation.fulfill()
-            }
+            .done {}
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
         
         wait(for: [expectation], timeout: 3.0)
     }
@@ -531,15 +525,9 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         
         createMokejimaiApiClient()
             .requestAccountDeletionCancel()
-            .done { response in
-                print(response)
-            }
-            .catch { error in
-                XCTFail(error.localizedDescription)
-            }
-            .finally {
-                expectation.fulfill()
-            }
+            .done {}
+            .catch { error in XCTFail(error.localizedDescription) }
+            .finally { expectation.fulfill() }
         
         wait(for: [expectation], timeout: 3.0)
     }
