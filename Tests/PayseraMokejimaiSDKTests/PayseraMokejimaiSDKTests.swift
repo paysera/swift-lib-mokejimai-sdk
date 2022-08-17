@@ -507,4 +507,40 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         wait(for: [expectation], timeout: 3.0)
         XCTAssertNotNil(object)
     }
+    
+    func testRequestAccountDeletion() {
+        let expectation = XCTestExpectation(description: "")
+        
+        createMokejimaiApiClient()
+            .requestAccountDeletion()
+            .done { response in
+                print(response)
+            }
+            .catch { error in
+                XCTFail(error.localizedDescription)
+            }
+            .finally {
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testRequestAccountDeletionCancel() {
+        let expectation = XCTestExpectation(description: "")
+        
+        createMokejimaiApiClient()
+            .requestAccountDeletionCancel()
+            .done { response in
+                print(response)
+            }
+            .catch { error in
+                XCTFail(error.localizedDescription)
+            }
+            .finally {
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 3.0)
+    }
 }
