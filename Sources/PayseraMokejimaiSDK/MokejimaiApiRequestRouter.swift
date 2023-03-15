@@ -3,7 +3,7 @@ import Foundation
 import PayseraCommonSDK
 
 enum MokejimaiApiRequestRouter {
-    // MARK: - GET
+    /// GET
     case getManualTransferConfiguration(filter: PSBaseFilter)
     case getUserAccountsData(id: Int)
     case getCurrentUserAddresses
@@ -12,14 +12,15 @@ enum MokejimaiApiRequestRouter {
     case getContactPhones(filter: PSContactFilter)
     case getContactEmails(filter: PSContactFilter)
     case getIdentityDocuments(userId: String, filter: PSBaseFilter)
+    case getTaxInformation(userId: String)
     
-    // MARK: - POST
+    /// POST
     case createCompanyAccount(userId: Int, creationType: PSCompanyCreationType)
     case sendLog(userId: String, action: String, context:[String: String])
     case addContactPhone(request: PSAddContactPhoneRequest)
     case addContactEmail(request: PSAddContactEmailRequest)
     
-    // MARK: - PUT
+    /// PUT
     case updateCurrentUserAddress(address: PSAddress)
     case updateUserAddress(userIdentifier: String, address: PSAddress)
     case confirmContactPhone(id: String, code: String)
@@ -31,11 +32,12 @@ enum MokejimaiApiRequestRouter {
     case requestDeletion
     case requestDeletionCancel
     
-    // MARK: - DELETE
+    /// DELETE
     case deleteContactPhone(id: Int)
     case deleteContactEmail(id: Int)
     
     // MARK: - Declarations
+    
     private static let baseURL = URL(string: "https://bank.paysera.com")!
     private static let usersRoute = "/user/rest/v1/users"
     private static let contactRoute = "/contact/rest/v1"
@@ -52,7 +54,8 @@ enum MokejimaiApiRequestRouter {
              .getAvailableIdentityDocuments,
              .getContactPhones,
              .getContactEmails,
-             .getIdentityDocuments:
+             .getIdentityDocuments,
+             .getTaxInformation:
             return .get
         case .createCompanyAccount,
              .sendLog,
@@ -78,7 +81,6 @@ enum MokejimaiApiRequestRouter {
     
     private var path: String {
         switch self {
-            
         case .getManualTransferConfiguration:
             return "/manual-transfer-configuration/rest/v1/configurations"
         case .createCompanyAccount:
@@ -121,6 +123,8 @@ enum MokejimaiApiRequestRouter {
             return Self.emailsRoute + "/\(id)/main"
         case .getIdentityDocuments:
             return "/identity-document/rest/v1/identity-documents"
+        case .getTaxInformation(let id):
+            return "tax-information/rest/v1/tax-information-identifier-messages/\(id)"
         case .uploadAvatar:
             return Self.avatarsRoute
         case .disableAvatar(let userID):
