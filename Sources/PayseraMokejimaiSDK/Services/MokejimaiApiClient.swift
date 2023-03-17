@@ -145,6 +145,10 @@ public class MokejimaiApiClient: PSBaseApiClient {
         )
     }
     
+    public func getTaxInformation(userId: String) -> Promise<PSTaxInformation> {
+        doRequest(requestRouter: MokejimaiApiRequestRouter.getTaxInformation(userId: userId))
+    }
+    
     public func uploadAvatar(request: PSUploadAvatarRequest) -> Promise<Void> {
         doRequest(requestRouter: MokejimaiApiRequestRouter.uploadAvatar(request: request))
     }

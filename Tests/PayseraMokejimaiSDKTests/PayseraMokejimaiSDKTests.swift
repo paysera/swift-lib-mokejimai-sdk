@@ -509,6 +509,27 @@ class PayseraMokejimaiSDKTests: XCTestCase {
         XCTAssertNotNil(object)
     }
     
+    func testGetTaxInformation() {
+        var object: PSTaxInformation?
+        let userId: String = "insert_id"
+        let expectation = XCTestExpectation(description: "")
+        
+        createMokejimaiApiClient()
+            .getTaxInformation(userId: userId)
+            .done { response in
+                object = response
+            }
+            .catch { error in
+                XCTFail(error.localizedDescription)
+            }
+            .finally {
+                expectation.fulfill()
+            }
+        
+        wait(for: [expectation], timeout: 3.0)
+        XCTAssertNotNil(object)
+    }
+    
     func testRequestAccountDeletion() {
         let expectation = XCTestExpectation(description: "")
         
