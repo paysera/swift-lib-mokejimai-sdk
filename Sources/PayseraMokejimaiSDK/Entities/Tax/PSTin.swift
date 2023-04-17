@@ -1,7 +1,6 @@
 import ObjectMapper
 
 public class PSTin: Mappable {
-    public var id: Int!
     public var uuid: String!
     public var userID: String!
     public var userType: String!
@@ -14,7 +13,6 @@ public class PSTin: Mappable {
     required public init?(map: Map) {}
     
     public func mapping(map: Map) {
-        id          <- map["id"]
         uuid        <- map["uuid"]
         userID      <- map["user_id"]
         userType    <- map["user_type"]
