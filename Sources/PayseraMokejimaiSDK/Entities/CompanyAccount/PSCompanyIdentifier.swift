@@ -9,11 +9,10 @@ public class PSCompanyIdentifier: Mappable {
         self.companyCode = companyCode
     }
     
-    required public init?(map: Map) {
-    }
+    required public init?(map: Map) {}
     
     public func mapping(map: Map) {
-        countryCode         <- map["country_code"]
-        companyCode         <- map["company_code"]
+        countryCode     <- map["country_code"]
+        companyCode     <- map["company_code"]
     }
 }

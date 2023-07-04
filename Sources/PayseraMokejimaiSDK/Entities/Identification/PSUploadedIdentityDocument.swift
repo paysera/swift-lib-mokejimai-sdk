@@ -1,7 +1,6 @@
 import ObjectMapper
 
 public class PSUploadedIdentityDocument: Mappable {
-    
     public var id: Int!
     public var type: String!
     public var dateOfExpiry: String?

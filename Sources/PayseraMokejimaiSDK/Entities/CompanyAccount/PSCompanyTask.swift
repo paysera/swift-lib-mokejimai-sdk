@@ -11,8 +11,7 @@ public class PSCompanyTask: Mappable {
         self.solution = solution
     }
     
-    required public init?(map: Map) {
-    }
+    required public init?(map: Map) {}
     
     public func mapping(map: Map) {
         id                  <- map["id"]

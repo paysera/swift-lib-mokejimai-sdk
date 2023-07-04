@@ -6,11 +6,9 @@ public class PSCompanyTaskSolutionError: Mappable {
     public var type: String!
     public var imageData: String!
 
-    public init() {
-    }
+    public init() {}
     
-    required public init?(map: Map) {
-    }
+    required public init?(map: Map) {}
     
     public func mapping(map: Map) {
         id                  <- map["id"]
