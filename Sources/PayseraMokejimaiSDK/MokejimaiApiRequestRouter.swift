@@ -31,6 +31,7 @@ enum MokejimaiApiRequestRouter {
     case disableAvatar(userID: String)
     case requestDeletion
     case requestDeletionCancel
+    case deactivate(userID: String)
     
     /// DELETE
     case deleteContactPhone(id: Int)
@@ -74,7 +75,8 @@ enum MokejimaiApiRequestRouter {
              .requestDeletionCancel:
             return .put
         case .deleteContactPhone,
-             .deleteContactEmail:
+             .deleteContactEmail,
+             .deactivate:
             return .delete
         }
     }
@@ -93,16 +95,18 @@ enum MokejimaiApiRequestRouter {
             return Self.usersRoute + "/current/addresses/\(address.type)"
         case .getUserAccountsData(let id):
             return "/user-accounts/rest/v1/accounts/\(id)"
-        case .getUserAddresses(let userIdentifier):
-            return Self.usersRoute + "/\(userIdentifier)/addresses"
-        case .updateUserAddress(let userIdentifier, let address):
-            return Self.usersRoute + "/\(userIdentifier)/addresses/\(address.type)"
+        case .getUserAddresses(let userID):
+            return Self.usersRoute + "/\(userID)/addresses"
+        case .updateUserAddress(let userID, let address):
+            return Self.usersRoute + "/\(userID)/addresses/\(address.type)"
         case .getAvailableIdentityDocuments:
             return "/identification/rest/v1/identity-document-illustrations"
         case .requestDeletion:
             return Self.usersRoute + "/me/request-deletion"
         case .requestDeletionCancel:
             return Self.usersRoute + "/me/request-deletion-cancel"
+        case .deactivate(let userID):
+            return Self.usersRoute + "/users/\(userID)/deactivate"
         case .getContactPhones,
              .addContactPhone:
             return Self.phonesRoute
@@ -150,32 +154,24 @@ enum MokejimaiApiRequestRouter {
         case .updateCurrentUserAddress(let address),
              .updateUserAddress(_, let address):
             return address.toJSON()
-            
         case .getAvailableIdentityDocuments(let filter):
             return filter.toJSON()
-            
         case .getContactPhones(let filter),
              .getContactEmails(let filter):
             return filter.toJSON()
-            
         case .addContactPhone(let request):
             return request.toJSON()
-            
         case .confirmContactPhone(_, let code),
              .confirmContactEmail(_, let code):
             return ["code": code]
-            
         case .addContactEmail(let request):
             return request.toJSON()
-            
         case .getIdentityDocuments(let userId, let filter):
             var queryParameters = filter.toJSON()
             queryParameters["user_id"] = userId
             return queryParameters
-            
         case .uploadAvatar(let request):
             return request.toJSON()
-            
         default:
             return nil
         }

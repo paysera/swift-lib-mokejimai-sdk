@@ -1,8 +1,13 @@
-//
-//  File.swift
-//  
-//
-//  Created by Mohsen Khosravinia on 7/4/23.
-//
+import ObjectMapper
 
-import Foundation
+public class PSUserAccountDeactivation: Mappable {
+    public var status: String!
+    
+    public init() {}
+    
+    required public init?(map: Map) {}
+    
+    public func mapping(map: Map) {
+        status      <- map["status"]
+    }
+}

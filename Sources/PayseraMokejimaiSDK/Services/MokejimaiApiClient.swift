@@ -43,6 +43,10 @@ public class MokejimaiApiClient: PSBaseApiClient {
         doRequest(requestRouter: MokejimaiApiRequestRouter.requestDeletionCancel)
     }
     
+    public func deactivateAccount(userID: String) -> Promise<PSUserAccountDeactivation> {
+        doRequest(requestRouter: MokejimaiApiRequestRouter.deactivate(userID: userID))
+    }
+    
     public func getManualTransferConfiguration(
         filter: PSBaseFilter
     ) -> Promise<PSMetadataAwareResponse<PSManualTransferConfiguration>> {
