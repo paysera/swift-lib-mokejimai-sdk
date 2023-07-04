@@ -106,7 +106,7 @@ enum MokejimaiApiRequestRouter {
         case .requestDeletionCancel:
             return Self.usersRoute + "/me/request-deletion-cancel"
         case .deactivate(let userID):
-            return Self.usersRoute + "/users/\(userID)/deactivate"
+            return Self.usersRoute + "/\(userID)/deactivate"
         case .getContactPhones,
              .addContactPhone:
             return Self.phonesRoute
