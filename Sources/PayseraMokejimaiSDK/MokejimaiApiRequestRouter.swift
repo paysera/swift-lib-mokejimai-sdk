@@ -72,11 +72,11 @@ enum MokejimaiApiRequestRouter {
              .uploadAvatar,
              .disableAvatar,
              .requestDeletion,
-             .requestDeletionCancel:
+             .requestDeletionCancel,
+             .deactivate:
             return .put
         case .deleteContactPhone,
-             .deleteContactEmail,
-             .deactivate:
+             .deleteContactEmail:
             return .delete
         }
     }
